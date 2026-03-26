@@ -61,7 +61,7 @@ In addition, the system uses predefined geofenced blindspot zones, which may be 
 | 6 | **Logging Function** | Records triggered events, received alerts, and rebroadcast actions for later analysis or testing. |
 
 ## System Flowchart
-<img alt="image" src="https://github.com/user-attachments/assets/9007c5ff-b0a4-4245-9213-4936be788998" width="250"/>
+<img alt="image" src="https://github.com/user-attachments/assets/6da23dcd-5d3a-47bc-9feb-a32a27ab7322" width="450" />
 
 The system begins by continuously monitoring the child’s location and motion data through the smartwatch. When the smartwatch detects that the child has entered a predefined geofenced blindspot or hazardous roadside area, the accelerometer and gyroscope data is further analysed to determine whether the child is moving toward the road at a potentially dangerous speed or pattern. If both conditions are satisfied, the smartwatch generates and broadcasts a BLE-based warning message to vehicles within a 15metre range of .
 
