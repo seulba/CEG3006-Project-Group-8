@@ -74,3 +74,15 @@ A nearby vehicle equipped with a compatible receiver then receives the alert, va
 
 
 # Decision Logs
+
+
+
+# AI Usage
+
+
+
+# Individual Reflections
+
+
+
+# References
