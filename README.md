@@ -10,8 +10,9 @@
 
 ## System Architecture
 
+<p align='center'>
 <img alt="image" src="https://github.com/user-attachments/assets/151f1925-3976-4ca6-bad5-b757e70b650b" width="500"/>
-
+</p>
 The proposed system architecture consists of three main subsystems: the pedestrian subsystem, the communication subsystem, and the vehicle subsystem. On the pedestrian side, a smartwatch worn by the child continuously monitors location and motion data using onboard sensors such as GPS, an accelerometer and a gyroscope. The smartwatch application checks whether the child is within a predefined geofenced blindspot or hazardous roadside zone and evaluates whether the child’s movement pattern indicates an approach toward the road.
 
 When the trigger conditions are met, the smartwatch generates a BLE-based warning message and broadcasts it to vehicles within range of 15metres. On the vehicle side, an On-Board Unit (OBU) or compatible head unit receives the message, validates its freshness and uniqueness, and displays a warning to the driver. To extend situational awareness, the first receiving vehicle may rebroadcast the warning to nearby vehicles within a range of 50metres. This forwarding process is controlled with a hop count of 2 hops and message expiry time of 1 minute to prevent unnecessary network congestion.
@@ -61,8 +62,9 @@ In addition, the system uses predefined geofenced blindspot zones, which may be 
 | 6 | **Logging Function** | Records triggered events, received alerts, and rebroadcast actions for later analysis or testing. |
 
 ## System Flowchart
+<p align='center'>
 <img alt="image" src="https://github.com/user-attachments/assets/6da23dcd-5d3a-47bc-9feb-a32a27ab7322" width="450" />
-
+</p>
 The system begins by continuously monitoring the child’s location and motion data through the smartwatch. When the smartwatch detects that the child has entered a predefined geofenced blindspot or hazardous roadside area, the accelerometer and gyroscope data is further analysed to determine whether the child is moving toward the road at a potentially dangerous speed or pattern. If both conditions are satisfied, the smartwatch generates and broadcasts a BLE-based warning message to vehicles within a 15metre range of .
 
 A nearby vehicle equipped with a compatible receiver then receives the alert, validates the message, and warns the driver through the vehicle dashboard or head unit. To improve awareness for approaching vehicles, the first receiving vehicle may rebroadcast the message to nearby vehicles within a range of 50metres. The forwarding process is controlled using message expiry time and hop count to prevent excessive rebroadcasting.
@@ -73,9 +75,496 @@ A nearby vehicle equipped with a compatible receiver then receives the alert, va
 ## Real-life Scenario Use Case
 
 
+
 # Decision Logs
 
+This document records the team’s key design decisions from **Decision Log #1 to Decision Log #10**, including the trigger or problem, options considered, evaluation criteria, and final rationale behind each selected direction.
 
+---
+
+<details>
+<summary><strong>Decision Log #1 — Selecting the Initial Target Problem and User Group</strong></summary>
+
+### Date
+08/03/2026
+
+### Trigger / Problem
+Based on our research, traffic accidents that caused injuries climbed by about 7% to 7,560 cases in 2025. Deaths from traffic accidents also rose from 139 cases in 2024 to 147 cases in 2025, showing a steady rise since 2022. In addition, red-light-running-related accidents rose by 27.1% from 2024 to 2025 (Sng, 2026). Based on this, the team evaluated and selected the targeted problem and user group.
+
+### Options / Alternatives
+- Busy Junction
+- Special Pedestrian Groups
+- Zebra Crossing
+
+### Evaluation Criteria
+- Relevance to the stated objective
+- Relevance to a real-world safety issue
+- Originality
+- Feasibility without first developing a hardware prototype
+- Ability to justify with existing literature and solutions
+- Clarity of target user group focus
+
+### Decision and Rationale
+The team decided to focus on **special groups of pedestrians**, particularly the elderly.
+
+Elderly pedestrians are at higher risk because they generally have slower walking speed, reduced agility, longer response time, and lower situational awareness compared to younger adults. This becomes even more serious as red-light-running-related accidents continue to increase, despite pedestrians often having a false sense of security when crossing because they have the right of way.
+
+When drivers attempt to beat the red light, pedestrians may need to react quickly to avoid danger. Therefore, there is a need to notify both pedestrians and drivers earlier so that both parties can avoid accidents from happening.
+
+### AI Usage
+AI was used to brainstorm possible V2P application areas and help compare them. The final choice and rationale were selected by the team.
+
+### Team Members
+- Wen Hui
+- Khee Xuan
+- Yuankai
+- Daniel
+- Zelda
+- Syaakir
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #2 — Selecting the Initial Solution Direction</strong></summary>
+
+### Date
+03/03/2026
+
+### Trigger / Problem
+Based on the selected issue identified in Decision Log #1, namely elderly pedestrians’ safety at traffic junctions, with a focus on jaywalking and unsafe crossing behaviour at signalised intersections, this decision log evaluates and selects a suitable solution to address the problem.
+
+### Options / Alternatives
+- Roadside unit / smart traffic light based warning system
+- Smartwatch-based alerting system to pedestrian
+- Installation of camera to identify pedestrian
+- Different sound cue for traffic light when abnormal road behaviour is detected
+
+### Evaluation Criteria
+- Relevance to the stated objective
+- Relevance to a real-world safety issue
+- Originality
+- Feasibility without first developing a hardware prototype
+- Ability to justify with existing literature and solutions
+- Clarity of target user group focus
+
+### Decision and Rationale
+The team selected a **roadside-based pedestrian monitoring and warning system**.
+
+Using cameras or infrared sensors installed onto existing traffic lights together with computer vision, the system detects whether pedestrians are still within the crossing area after the traffic signal changes. When this occurs, a warning is sent through the vehicular network to the vehicle’s OBU, which alerts the driver of pedestrians ahead and advises them to slow down or wait before proceeding.
+
+This option was chosen because it directly addresses the safety risk at signalised intersections and does not depend on pedestrians carrying smartphones or wearable devices. It provides real-time detection of actual crossing conditions, supports inclusive use for elderly or slower-moving pedestrians, and improves driver awareness before a conflict occurs. As a result, it is expected to reduce potential vehicle-pedestrian collisions and improve safety at busy intersections.
+
+### AI Usage
+AI was used to brainstorm possible V2P application areas and help compare them. The final choice and rationale were selected by the team.
+
+### Team Members
+- Khee Xuan
+- Yuankai
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #3 — Revising the Concept After Feedback</strong></summary>
+
+### Date
+08/03/2026
+
+### Trigger / Problem
+After consulting with the professor, the team received feedback that the initial concept developed in Decision Log #1 and #2 was more V2I-focused than V2P-focused. In addition, the proposed use of installed cameras to detect pedestrians and provide data to vehicles would increase both system complexity and implementation cost.
+
+The proposed target user group was also not clearly defined, making the concept too broad and vague. Furthermore, the original scenario of jaywalking at a traffic junction was considered unrealistic, since jaywalking is more likely to occur at uncontrolled road sections or between parked vehicles rather than at signalised crossings.
+
+As a result, the team decided to reject the previous approach and revise the concept by identifying a more suitable V2P application, a more appropriate real-world scenario, and a more specific problem statement that was both relevant and feasible.
+
+### Options / Alternatives
+- Cyclist warning system
+- Wheelchair-user crossing assistance
+- Child pedestrian safety
+- Driver collision warning for pedestrians
+- Early warning for pedestrian hotspot areas
+- Jaywalking at uncontrolled junctions
+- Junction turn with obstructed turns
+
+### Evaluation Criteria
+- Potential real-world safety relevance
+- Originality and feasibility of the concept
+- Ability to justify the problem using existing literature and current solutions
+- Clarity of the target user group within a specific scenario
+
+### Decision and Rationale
+The team decided to focus on **child pedestrian safety**.
+
+This option was selected because it provides a clearer and more specific target user group within the V2P context compared to more general pedestrian-focused solutions. Children are more susceptible to road traffic injuries compared to adults due to their immature physical, cognitive, and social development (Oh & Kim, 2025).
+
+Most existing solutions focus on pedestrians as a general group and place minimal focus on child safety, which makes this a meaningful and relevant area for further research, with good potential to be refined into a more specific real-world scenario in later design stages. Compared to the other options, this direction offers a more focused foundation for developing an original concept while remaining feasible within the project scope.
+
+### AI Usage
+-
+
+### Team Members
+- Daniel
+- Khee Xuan
+- Yuankai
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #4 — Refining the Problem Area Within Child Pedestrian Safety</strong></summary>
+
+### Date
+13/03/2026
+
+### Trigger / Problem
+The focus on child pedestrian safety was still too broad. The team therefore needed to further refine the problem area and identify a more specific issue to address within this context. This was important because a clearer and more detailed problem statement would help guide the development of a more targeted and meaningful V2P solution for child pedestrians.
+
+### Options / Alternatives
+- Child runs across the road after a ball
+- Child pedestrian unpredictable behaviours
+- Unable to spot children due to height
+- Children unaware of their surroundings
+
+### Evaluation Criteria
+- Feasibility of the option
+- Ability to justify it using existing literature and current solutions
+- Realism of the proposed application
+- Relevance of real-world limitations or research gaps
+
+### Decision and Rationale
+The team decided to focus on **child pedestrians’ unpredictable behaviours**.
+
+This option was selected because unpredictability in pedestrian movement is recognised as a key challenge in the V2P context (Gelbal et al., 2024). Additionally, accidents involving children are often linked to such unpredictability and their inability to make adequate decisions (Oh & Kim, 2025). Sudden changes in movement can reduce the effectiveness of collision prediction and warning systems and catch drivers off guard.
+
+Within this broader issue, child pedestrians were considered especially relevant because their behaviour near roads is less consistent and more unpredictable (Sewalkar & Seitz, 2019). Therefore, it is more difficult for drivers and vehicle systems to anticipate their movement quickly. Even though predicting a child’s behaviour may not be easy, reducing the likelihood of accidents remains essential. As a result, this problem was seen as a meaningful and researchable direction that could support the development of a more focused V2P safety concept.
+
+### AI Usage
+-
+
+### Team Members
+- Daniel
+- Syaakir
+- Wen Hui
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #5 — Selecting the Specific Real-World Scenario</strong></summary>
+
+### Date
+14/03/2026
+
+### Trigger / Problem
+Following the earlier decision to focus on child pedestrians’ unpredictable behaviours, the next step was to identify which specific real-world scenario would be the most relevant and suitable for further development. Although children may behave unpredictably in many road situations, selecting a more prominent and realistic scenario was necessary to guide the technical design of the proposed solution and ensure that the concept remained feasible and meaningful.
+
+### Options / Alternatives
+- Child pedestrian running or jumping into the road at a junction during a red light
+- Child pedestrian running into the road from blind-spot scenarios
+- Child pedestrian running at a zebra crossing without checking corners
+- Child runs across the road after a ball
+
+### Evaluation Criteria
+- Feasibility of the option
+- Relevance of the specific scenario
+- Likelihood of occurrence
+- Presence of real-world accident evidence supporting the scenario
+
+### Decision and Rationale
+The team decided to focus on **child pedestrians running onto the road from blind-spot scenarios**.
+
+While all the options were considered valid and relevant, the blind-spot scenario was selected because it presents a higher immediate safety risk to both drivers and child pedestrians.
+
+In junction and zebra crossing situations, drivers are generally more likely to expect pedestrians and may have some visual awareness of nearby children. In contrast, in blind-spot situations, an approaching driver may have little or no visibility of a child who suddenly emerges from behind an obstruction such as a parked vehicle, roadside object, or bush. This can result in serious injuries when the car is travelling at full speed on a clear road.
+
+This significantly reduces the available reaction time and increases the likelihood of a collision. The team also noted that examples of such accidents can be found in real-world incident footage. Overall, it was collectively agreed that blind-spot scenarios represent a more critical and realistic situation for the concept to address moving forward.
+
+### AI Usage
+-
+
+### Team Members
+- Daniel
+- Zelda
+- Syaakir
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #6 — Selecting the Detection / Alert Mechanism</strong></summary>
+
+### Date
+15/03/2026
+
+### Trigger / Problem
+Based on Decision Log #5, the team had decided to focus on child pedestrians’ unpredictable behaviour, particularly in blind-spot situations. The next step was to evaluate what type of detection or alert mechanism would be most suitable for reducing collision risk in such scenarios.
+
+Since the main concern was not just the presence of a child near the road, but also the possibility of sudden risky movement, the team needed to determine which approach could better capture this behaviour and provide a more meaningful warning.
+
+### Options / Alternatives
+- **Use only location-based alerts near roadside**  
+  For example, proximity warning when a child is near the roadside
+- **Incorporate behaviour-based detection when near roadside**  
+  For example, detecting sudden acceleration or a sharp change in speed over a short period of time
+- **Use advanced ML prediction models to observe and predict child pedestrian behaviour**  
+  For example, cameras or nearby infrastructure monitoring a child’s movement patterns
+
+### Evaluation Criteria
+- Ability to address unpredictability
+- Improvement in early risk detection
+- Feasibility of implementation
+- Suitability within the intended V2P scope
+
+### Decision and Rationale
+The team decided to incorporate **behaviour-based detection specialised for child movement patterns**, with the main focus on identifying sudden acceleration or rapid movement, such as running or sprinting, as indicators of potentially risky behaviour.
+
+This option was selected because it addresses the core issue of unpredictability more directly than location-based alerts alone. A location-based warning may still be useful, but by itself it may not be sufficient, as it could produce too many false positives in roadside environments where children may be present without actually intending to enter the road.
+
+The use of advanced machine learning prediction models was also considered, but it was not chosen as the main approach at this stage. One reason is that machine-learning methods based purely on visual observation, such as camera-based monitoring from nearby infrastructure, may not be sufficient on their own to reliably capture child intention or sudden behaviour in all situations. They may also require large and relevant datasets for training while introducing additional system complexity and cost if cameras or fixed infrastructure are needed.
+
+In addition, there are many different roads, so it is not feasible to install cameras everywhere for constant road monitoring. Such systems would also require a large amount of training data to perform reliably and may still experience blind spots or limited visibility due to the fixed position of cameras.
+
+However, the team acknowledged that machine learning may still be a useful supporting approach in the future, particularly if applied to sensor-based data rather than visual data alone. For example, motion-related data from wearable or mobile sensors could potentially be used to improve prediction of whether a child is likely to start running or suddenly enter the road, together with GPS to determine whether the situation is high risk.
+
+Overall, behaviour-based detection was considered the most appropriate primary option at this initial stage of development, especially since there would not be enough collected data to train a robust model properly. It remains more feasible within the project scope and offers a more focused way to respond to sudden child movement in blind-spot scenarios.
+
+### AI Usage
+-
+
+### Team Members
+- Wen Hui
+- Khee Xuan
+- Yuankai
+- Daniel
+- Zelda
+- Syaakir
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #7 — Selecting the Trigger Logic</strong></summary>
+
+### Date
+18/03/2026
+
+### Trigger / Problem
+After identifying child pedestrians’ unpredictable movement as the key behaviour to address, the next step was to determine when the system should trigger an alert. Although the system is intended to improve safety by warning vehicles of potentially dangerous child movement, not every movement near a roadside should automatically be treated as high risk.
+
+Children may walk, stop, turn, or play near roadside areas without actually entering the path of a vehicle, so a warning mechanism that is too sensitive could result in frequent unnecessary alerts.
+
+This created an important design challenge for the team. On one hand, the system should provide warnings early enough to give drivers or nearby vehicles more time to react, especially in blind-spot situations where visual awareness may already be limited. On the other hand, if alerts are triggered too easily or too often, the system may produce too many false positives. This could reduce trust in the warning system, cause alert fatigue, and make drivers more likely to ignore or undervalue future warnings.
+
+Therefore, the team needed to evaluate what type of trigger logic would be most suitable for distinguishing normal child movement from genuinely risky behaviour in a way that is both practical and reliable for real-world use.
+
+### Options / Alternatives
+- **Always-on proximity alerts**  
+  Trigger an alert whenever a child is detected near the roadside
+- **Simple threshold trigger**  
+  Trigger an alert when speed exceeds a certain value
+- **Event-based trigger**  
+  Trigger an alert when sudden acceleration or direction change is detected
+- **Continuous alert updates**  
+  Constantly send updates to nearby vehicles in real time
+- **Multi-condition trigger**  
+  Combine movement behaviour, proximity, and contextual factors before issuing an alert
+
+### Evaluation Criteria
+- Accuracy in detecting risky behaviour
+- False positive rate
+- System responsiveness
+- Whether the trigger condition is valid and applicable for the selected blind-spot child pedestrian scenario
+
+### Decision and Rationale
+The team decided to implement a **multi-condition trigger mechanism**, where an alert is issued only when sudden movement, such as rapid acceleration or a sharp change in direction, occurs while the child is near the roadside or within close vehicle proximity.
+
+This option was selected because it provides a more contextual and reliable way to identify risky behaviour compared to using only one condition.
+
+Always-on proximity alerts were not chosen because they are likely to produce a high number of false positives, as a child may be near the road without actually being in immediate danger. A simple threshold trigger based only on speed was also considered insufficient, since it does not account for the surrounding situation or whether the movement is actually hazardous. Continuous alert updates were not selected as the main approach because constantly transmitting warnings may be unnecessary for a real-time safety system and could reduce the clarity and usefulness of alerts.
+
+Overall, the multi-condition trigger was considered the most suitable option because it improves the relevance of warnings, reduces unnecessary alerts, and supports earlier detection of genuinely risky behaviour, making the system more practical and trustworthy for real-world use.
+
+### AI Usage
+-
+
+### Team Members
+- Wen Hui
+- Zelda
+- Syaakir
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #8 — Selecting the Communication Method</strong></summary>
+
+### Date
+18/03/2026
+
+### Trigger / Problem
+From Decision Log #7, the team had already identified that the system would require a trigger mechanism to determine when risky child movement should generate an alert. The next step was to determine how this alert data should be communicated from the child pedestrian device to nearby vehicles.
+
+To support this discussion, the team made two working assumptions for the concept stage. First, it was assumed that most children in urban areas would have access to a smartphone or a smart wearable device, since such devices are commonly used by parents for communication and safety purposes. Second, it was assumed that the selected use case would take place in an area with sufficient communication coverage for nearby devices to exchange data.
+
+Based on these assumptions, the team considered several communication options supported by smartphones, such as Bluetooth, Wi-Fi, and cellular communication. IEEE 802.11p / DSRC was not considered feasible for direct V2P communication in this case because commercial smartphones do not normally support it directly and it generally requires dedicated vehicular hardware. Existing V2P literature by Sewalkar et al. notes that smartphones commonly provide cellular, Wi-Fi, and Bluetooth connectivity, while 802.11p requires dedicated hardware not generally available on smartphones.
+
+### Options / Alternatives
+- Wi-Fi-based V2P communication with compact high-priority safety messages
+- Cellular-based V2P communication with compact high-priority safety messages
+- Bluetooth Low Energy (BLE)-based V2P communication with compact high-priority safety messages
+
+### Evaluation Criteria
+- Communication latency
+- Reliability under short-range urban conditions
+- Packet loss / interference sensitivity
+- Feasibility with standard smartphones
+- Suitability for safety-critical alerts
+- Fit with the proposed blind-spot child pedestrian scenario
+
+### Comparison Summary
+
+| Communication Method | Latency | Robustness (BER) | Power Consumption | Coverage |
+|---|---:|---:|---:|---:|
+| Cellular (URLLC) | < 1 ms | > 10^-5 | High | High |
+| Bluetooth Low Energy | 7.5 ms – 45 ms | 10^-5 (at low throughput, < 50 bytes) | Low | Medium |
+| Wi-Fi | 10 ms – 45 ms | 10^-5 | Medium | Low |
+
+### Decision and Rationale
+The team decided to prioritise **BLE-based V2P communication with compact high-priority safety messages** for further concept development.
+
+This option was considered the most suitable at this stage because the communication requirement was mainly for a short-range and time-sensitive first alert to a nearby vehicle, rather than continuous data exchange over a wider area. Compared to Wi-Fi and cellular-based communication, BLE was seen as a more practical option for short-range communication using current smartphone capabilities, given its low power consumption and acceptable latency and robustness for smaller payloads.
+
+BLE was preferred over Wi-Fi because Wi-Fi-based V2P systems typically require association procedures, which can delay the actual exchange of safety messages under mobility. The V2P survey also notes that Wi-Fi range may be sufficient in urban areas, but its association requirement is a key challenge for moving vehicles. BLE was preferred over cellular because cellular communication depends more heavily on network infrastructure and may introduce additional end-to-end delay and variability from the wider network path, even though it offers good range and mobility support.
+
+BLE is not inherently limited to only very short ranges, but its practical range and latency depend strongly on device capability, configuration, and environmental conditions. In some V2P-related studies, Bluetooth-based communication around 50 m has been reported, while Bluetooth LE in general can support much longer ranges under favourable conditions. Likewise, BLE latency can be low enough for time-sensitive alerts, around 7.5 ms to 45 ms, but the actual delay is affected by parameters such as advertising interval, scan settings, and smartphone implementation.
+
+For this reason, the team did not treat BLE as a guaranteed long-range or fixed-latency solution. Instead, it was considered suitable mainly for delivering a short-range first alert to a nearby vehicle, where its support on common smartphones and ability to transmit lightweight safety messages made it a practical option for further concept development. This choice is also supported by more recent work that implemented smartphone-based vehicle-to-VRU communication using BLE advertising specifically to warn nearby vehicles in partially occluded or occluded situations.
+
+The transmitted message should be kept small and safety-prioritised, containing only essential data such as estimated location, movement intensity or sudden acceleration status, and alert level. This reduces communication overhead, lowers the chance of congestion-related delay, improves BER performance, and makes the warning mechanism more appropriate for time-critical safety use.
+
+Overall, BLE with compact priority messages was considered the best fit for the proposed system because it does not require additional hardware attachment for current smart devices and aligns well with the concept’s two-layer design, in which a nearby vehicle first receives the child alert and then forwards it to other vehicles.
+
+### AI Usage
+-
+
+### Team Members
+- Daniel
+- Khee Xuan
+- Yuankai
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #9 — Selecting the Alert Message Contents</strong></summary>
+
+### Date
+19/03/2026
+
+### Trigger / Problem
+After deciding on the communication method for transmitting alerts, the next step was to determine what information should be included in the alert message. The main challenge was to ensure that the transmitted message contained enough information for nearby vehicles to recognise the level of risk and respond appropriately, while still keeping the message lightweight so that it could be delivered quickly without introducing unnecessary communication delay or network congestion.
+
+### Options / Alternatives
+- **Basic message**  
+  Includes the child pedestrian’s estimated location and movement intensity / sudden acceleration status
+- **Extended message**  
+  Includes the child pedestrian’s estimated location, movement intensity / sudden acceleration status, estimated direction of movement, and timestamp
+- **Full-context message**  
+  Includes the child pedestrian’s estimated location, movement intensity / sudden acceleration status, estimated direction of movement, timestamp, and additional historical movement or prior sensor data
+- **Priority safety message**  
+  Includes only essential safety-related information, such as estimated location, movement intensity / sudden acceleration status, and a warning message marked with a priority or alert flag for urgent forwarding
+
+> In this context, “speed” refers more broadly to movement intensity or sudden acceleration status, rather than precise pedestrian walking or running speed.
+
+### Evaluation Criteria
+- Message size and transmission latency
+- Usefulness for vehicle risk assessment
+- Reliability of included data
+- Suitability for real-time safety communication
+
+### Decision and Rationale
+The team decided to use a **priority safety message structure**, containing only essential safety-related information such as the child pedestrian’s estimated location, movement intensity or sudden acceleration status, and a warning message marked with a priority or alert flag for urgent forwarding.
+
+This option was selected because it provides nearby vehicles with sufficient information to recognise that a potentially dangerous situation may be occurring, while keeping the transmitted message lightweight for faster delivery and lower communication overhead.
+
+The minimal message option was not chosen because location alone may not provide enough context for a vehicle to determine whether the child is actually at immediate risk. The basic message was considered more useful, but location and movement intensity alone may still be insufficient for prioritising urgent alerts within the network. The extended message option was also considered, but estimated direction of movement may not always be reliable in this concept because the smartphone may be carried in different ways, such as in a pocket or bag, which can affect the consistency of directional estimation.
+
+The full-context message was not selected because including historical movement or prior sensor data would increase message size, transmission overhead, and latency, making it less suitable for time-critical safety communication.
+
+Overall, the priority safety message was considered the most appropriate option because it balances practical risk-related information with low communication overhead, allowing alerts to remain fast, focused, and more suitable for real-time warning in the selected blind-spot child pedestrian scenario. At this stage, this decision helped establish the core form of the proposed alerting approach.
+
+### AI Usage
+-
+
+### Team Members
+- Wen Hui
+- Khee Xuan
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #10 — Selecting the Child Identification Method</strong></summary>
+
+### Date
+20/03/2026
+
+### Trigger / Problem
+An oversight identified from Decision Log #8 was that a smartphone by itself does not indicate whether the user is a child or an adult. This creates a problem for the proposed system, since the concept is specifically designed around child pedestrian safety and child-related unpredictable movement behaviour. If the pedestrian identity is unknown, the system may not be able to determine whether the alert should be processed under the child-focused warning logic.
+
+As a result, the team needed to evaluate how the system could more reliably determine that the pedestrian involved is a child. A possible solution would be to use a device or platform that requires prior registration, setup, or age-related input. This would allow the system to associate the transmitted alert with the intended user group and improve the integrity and relevance of the warning process.
+
+### Options / Alternatives
+- **Watch-based identification**  
+  Use a smartwatch or wearable device associated with the child user profile  
+  Could potentially leverage an existing device such as a health or fitness tracker given out by the Health Promotion Board
+- **Tag-based identification**  
+  Use a simple dedicated tag assigned to the child  
+  Could act as a lightweight identifier linked to a registered child profile
+- **App-based identification**  
+  Use a smartphone application with prior registration and age input  
+  The app would identify the user as a child based on stored profile details
+- **Combined wearable + app approach**  
+  Use both a wearable or tag and a smartphone app together  
+  The wearable provides a dedicated child-linked identifier, while the app handles registration and supporting sensor data
+
+### Evaluation Criteria
+- Reliability in identifying the user as a child
+- Feasibility of implementation
+- Ease of setup and use
+- Suitability for everyday real-world use
+- Compatibility with the proposed V2P concept
+
+### Decision and Rationale
+The team decided to adopt a **combined wearable + app approach**.
+
+This option was selected because it provides a more reliable way of identifying the pedestrian as a child while also supporting the broader system concept. The app can handle initial registration and age-related profile information, which can be set up by parents or guardians, while the wearable or tag can act as a more dedicated child-linked identifier during actual use. This makes the identification process more robust than relying only on a smartphone, which by itself does not reveal whether the user is a child.
+
+A watch-based identification option was considered useful because it is wearable and is more likely to remain with the child consistently during daily use. In addition, if the watch is a smartwatch, it may also be capable of collecting relevant motion-related sensor data, transmitting safety-related information, and potentially working together with a supporting mobile application. This makes it more than just an identification device, as it could also contribute to sensing and communication within the wider concept.
+
+An app-based identification approach was likewise considered feasible, as a smartphone application can support user registration, profile management, and age-related setup. However, this option depends strongly on the assumption that the child is consistently carrying and using the correct device, which may reduce its reliability in real-world use.
+
+Overall, the combined wearable + app approach was considered a useful refinement to the emerging proposed concept, as it improves the reliability of identifying whether the pedestrian is a child while remaining practical and compatible with the wider system design. This decision strengthened the concept by providing a clearer way to distinguish child users from general pedestrians.
+
+### AI Usage
+-
+
+### Team Members
+- Zelda
+- Daniel
+- Syaakir
+
+</details>
 
 # AI Usage
 
