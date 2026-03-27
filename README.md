@@ -795,7 +795,7 @@ For deployment and manufacturing, no fixed infrastructure installation is requir
 Overall, the discussion highlighted that the concept remains feasible from a cost perspective, especially if it leverages already-owned smartphones and avoids extensive infrastructure deployment. However, the choice between a tag and a smartwatch would involve a trade-off between lower cost and richer sensing capability.
 
 ### AI Usage
-NA
+Use AI to help estimate the total cost of the proposed solution in overall
 
 ### Team Members
 - Wen Hui
