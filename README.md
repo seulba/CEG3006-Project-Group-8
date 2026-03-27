@@ -151,15 +151,15 @@ This document records the team’s key design decisions from **Decision Log #1 t
 <summary><strong>Decision Log #1 — Selecting the Initial Target Problem and User Group</strong></summary>
 
 ### Date
-08/03/2026
+03/03/2026
 
 ### Trigger / Problem
 Based on our research, traffic accidents that caused injuries climbed by about 7% to 7,560 cases in 2025. Deaths from traffic accidents also rose from 139 cases in 2024 to 147 cases in 2025, showing a steady rise since 2022. In addition, red-light-running-related accidents rose by 27.1% from 2024 to 2025 (Sng, 2026). Based on this, the team evaluated and selected the targeted problem and user group.
 
 ### Options / Alternatives
-- Busy Junction with Different Pedestrian Groups
-- Special Pedestrian Groups
-- Zebra Crossing with Different Pedestrian Groups
+- Cyclist
+- Specific Pedestrian Groups i.e. elderly, children
+- Wheelchair Users
 
 ### Evaluation Criteria
 - Relevance to the stated objective
@@ -1058,6 +1058,7 @@ NA
 
 </details>
 
+---
 
 # AI Usage
 
@@ -1066,12 +1067,12 @@ ChatGPT
 
 <details>
 <summary><strong>AI Prompts</strong></summary>
-AI Prompt 1:
+**AI Prompt 1:**
 <p align='center'>
 <img alt="Screenshot 2026-03-27 215823" src="https://github.com/user-attachments/assets/152ee29d-5ebe-45a1-a766-cc9c86b7f024" width="550" />
 </p>
 
-AI Prompt 2:
+**AI Prompt 2:**
 <p align='center'>
 <img alt="Screenshot 2026-03-27 220126" src="https://github.com/user-attachments/assets/b5959c53-24a9-4e00-af68-1139758bf0ae" width="550" />
 </p>
@@ -1084,12 +1085,23 @@ AI Prompt 2:
 <img alt="Screenshot 2026-03-27 220314" src="https://github.com/user-attachments/assets/1da48350-247b-44a8-9006-8f1bcacdc985" width="550" />
 </p>
 
-Evaluation for Prompt 1 and 2:
+**Evaluation for Prompt 1 and 2:**
 Results were verified with ChatGPT’s response by cross referencing primary sources, checking the official developer program pages. Apple’s developer enrollment page and Google Play Console documentation publicly list their fees of $99 per year and $25 one time respectively. For BLE SoC costs, by checking distributor listings on sites like Mouser, DigiKey or Arrow Electronics, searching the Nordic nRF52832 or Dialog DA14531 gives real time pricing at different quantity tiers. At 1k+ units, Nordic parts typically land in the $2-4 range which aligns with what GPT quoted. For BLE stack licensing, Nordic, Silicon Labs and TI publish their SDK licensing terms on their developer portals which confirms that their BLE stacks ship fee with chip purchase, Zephyr RTOS website confirms Apache 2.0 licensed with no royalties. 
 
 Hence Prompt 1 and 2 was quite useful in assisting in the analysis of the overall cost perspective of the project
 
-AI Prompt 3:
+**AI Prompt 3:**
+<p align='center'>
+<img alt="image" src="https://github.com/user-attachments/assets/9af8b988-9609-4a28-ace8-abc3793ed058" width="550" />
+</p>
+
+<p align='center'>
+<img alt="image" src="https://github.com/user-attachments/assets/5b148a15-5f16-4cb2-8f77-cf2d57555129" width="550" />
+</p>
+
+**Evaluation:**
+
+This helps support the team with the decision justification. By identifying which group is more vulnerable to accidents, the discussion becomes more focused and meaningful. It also helps show that the project direction is based on actual road safety concerns rather than assumptions, which strengthens the overall credibility of the report.
 
 </details>
 
@@ -1097,7 +1109,7 @@ AI Prompt 3:
 
 <details>
 <summary><strong>Identified Weaknesses/Hallucinations</strong></summary>
-AI Hallucination 1 (Log 2):
+**AI Hallucination 1 (Log 2):**
 <p align='center'>
 <img alt="image" src="https://github.com/user-attachments/assets/32a0e457-a3ef-448b-b437-e2381225677b" width="550" />
 </p>
@@ -1110,12 +1122,12 @@ AI Hallucination 1 (Log 2):
 <img alt="image" src="https://github.com/user-attachments/assets/396d8e52-5160-4322-8161-a4a207a924f1" width="550" />
 </p>
 
-Evaluation:
+**Evaluation:**
 A hallucination identified in the response of the AI is that the effectiveness of auditory cues for elderly pedestrians is overgeneralised, resulting in conclusions that may not fully reflect real-world conditions. For instance, the claim that sound cues can reliably alert pedestrians assumes uniform perception and attention, which does not account for differing ranges in hearing ability, environmental noise, or distractions surrounding that area. While these cues may be effective under controlled or ideal scenarios, however factors such as partial hearing loss, traffic noise, and pedestrian distraction can also significantly reduce the possibility of the audio cues being noticed or correctly interpreted. 
 As such, the assumption that auditory signals alone provide meaningful safety benefits represents overly optimistic estimation. A more grounded evaluation should consider the diversity in elderly sensory abilities and the environment to ensure the system’s effectiveness is realistic.
 
 
-AI Weakness 2 (Log 8):
+**AI Weakness 2 (Log 8):**
 <p align='center'>
 <img alt="image" src="https://github.com/user-attachments/assets/81298593-a6ae-412d-adcf-a029b1d6a65d" width="550" />
 </p>
@@ -1132,7 +1144,7 @@ AI Weakness 2 (Log 8):
 <img alt="image" src="https://github.com/user-attachments/assets/79d2b8d8-8a5f-4cf6-99ee-036731c68fb4" width="550" />
 </p>
 
-Evaluation:
+**Evaluation:**
 A weakness identified in the analysis is that several statements are overgeneralised, resulting in conclusions that may not be fully accurate within the context of V2P systems. 
 
 For instance, the claim that WiFi latency is typically under 10ms does not reliably reflect real-world conditions. While such latency may be achievable under ideal or controlled environments, practical deployments introduce additional factors that significantly affect overall performance. These include packet delays, channel access mechanisms, message transmission intervals and processing overhead. 
@@ -1142,7 +1154,7 @@ When these factors are taken into account, the effective end-to-end latency for 
 https://support.astropad.com/en/articles/11835410-latency-and-expected-speeds-wifi-vs-wired-connections-explained
 
 
-AI Weakness 3 (Log 12):
+**AI Weakness 3 (Log 12):**
 <p align='center'>
 <img alt="image" src="https://github.com/user-attachments/assets/ec383509-fd7e-4960-b612-4502107fd634" width="550" />
 </p>
@@ -1155,14 +1167,14 @@ AI Weakness 3 (Log 12):
 <img alt="image" src="https://github.com/user-attachments/assets/2b760665-c2f7-40db-aa55-bb0f0c1315f3" width="550" />
 </p>
 
-Evaluation:
+**Evaluation:**
 A weakness in the analysis is the lack of technical and environmental context for wearable devices in a V2P system. The discussion assumes ideal operation, but it does not consider real-world factors such as urban canyons that could affect GPS accuracy, battery drain under frequent location updates, or intermittent connectivity that could delay alerts. 
 
 Claims regarding “long battery life” are also vague, with no numerical benchmarks or consideration or trade-offs between functionality and energy consumption. Furthermore, the evaluation focuses on individual device features without addressing system-level integration, such as interoperability with vehicles, latency in transmitting critical alerts, or data privacy implications. Emphasis is placed on functional attributes like motion detection or alert notifications, but practical deployment challenges are largely overlooked. Causing the analysis to overstate the readiness and effectiveness of wearables for real-world pedestrian safety applications. 
 
-
 </details>
 
+---
 
 # Individual Reflections
 <details>
@@ -1175,12 +1187,11 @@ During the project, I played an active role in shaping the development of our V2
 I contributed significantly to the project by actively participating in discussions and providing 
 valuable ideas for the V2P implementation. I assisted in documenting the team’s design
 process, including decision logs that captured trade offs between different communication
-protocols, safety mechanisms and real world constraints. I contributed to the evaluation of
+protocols, safety considerations and real world constraints. I contributed to the evaluation of
 technical alternatives, analysing feasibility and assessing potential impacts on system
 performance and reliability. Throughout the project, I helped ensure the design was both
 logically structured, technically sound and collaborated effectively with the team to make
-informed engineering decisions. It helped improve my analytical thinking skills and contribute to
-delivering a technical sound solution.
+informed engineering decisions. This project helped to strengthen my analytical thinking skills by requiring me to examine problems more carefully, consider different perspectives, and evaluate the advantages and limitations of each possible solution. Through this process, I became more mindful of how technical decisions can affect the overall system, rather than focusing only on individual components.
 </details>
 
 <details>
