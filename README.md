@@ -730,7 +730,7 @@ The smartwatch was further seen as advantageous because it remains wrist-based, 
 Therefore, the smartwatch was determined to be the most suitable option as it not only supports reliable child identification, but also enhances the system’s ability to capture, analyse, and respond to child movement behaviour in a meaningful and practical way. As a refinement to the existing concept, the smartwatch can act as a more capable platform for strengthening sensing, communication, and context awareness within the overall system.
 
 ### AI Usage
-NA
+AI was used to identify and evaluate different wearable options for the V2P system, highlighting their features and limitations.
 
 ### Team Members
 - Zelda
@@ -795,7 +795,7 @@ For deployment and manufacturing, no fixed infrastructure installation is requir
 Overall, the discussion highlighted that the concept remains feasible from a cost perspective, especially if it leverages already-owned smartphones and avoids extensive infrastructure deployment. However, the choice between a tag and a smartwatch would involve a trade-off between lower cost and richer sensing capability.
 
 ### AI Usage
-Use AI to help estimate the total cost of the proposed solution in overall
+Use AI to help estimate the total cost of the overall proposed solution. 
 
 ### Team Members
 - Wen Hui
@@ -1056,12 +1056,33 @@ ChatGPT
 <details>
 <summary><strong>AI Prompts</strong></summary>
 AI Prompt 1:
+<p align='center'>
+<img alt=<img width="722" height="741" alt="Screenshot 2026-03-27 215823" src="https://github.com/user-attachments/assets/152ee29d-5ebe-45a1-a766-cc9c86b7f024" />
+</p>
 
 AI Prompt 2:
+<p align='center'>
+<img alt=<img width="799" height="792" alt="Screenshot 2026-03-27 220126" src="https://github.com/user-attachments/assets/b5959c53-24a9-4e00-af68-1139758bf0ae" />
+</p>
+
+<p align='center'>
+<img alt=<img width="797" height="805" alt="Screenshot 2026-03-27 220206" src="https://github.com/user-attachments/assets/b9df0ce1-06d3-463e-a670-5d6e3b9d216e" />
+</p>
+
+<p align='center'>
+<img alt=<img width="750" height="761" alt="Screenshot 2026-03-27 220314" src="https://github.com/user-attachments/assets/1da48350-247b-44a8-9006-8f1bcacdc985" />
+</p>
+
+Evaluation for Prompt 1 and 2:
+Results were verified with ChatGPT’s response by cross referencing primary sources, checking the official developer program pages. Apple’s developer enrollment page and Google Play Console documentation publicly list their fees of $99 per year and $25 one time respectively. For BLE SoC costs, by checking distributor listings on sites like Mouser, DigiKey or Arrow Electronics, searching the Nordic nRF52832 or Dialog DA14531 gives real time pricing at different quantity tiers. At 1k+ units, Nordic parts typically land in the $2-4 range which aligns with what GPT quoted. For BLE stack licensing, Nordic, Silicon Labs and TI publish their SDK licensing terms on their developer portals which confirms that their BLE stacks ship fee with chip purchase, Zephyr RTOS website confirms Apache 2.0 licensed with no royalties. 
+
+Hence Prompt 1 and 2 was quite useful in assisting in the analysis of the overall cost perspective of the project
 
 AI Prompt 3:
 
 </details>
+
+---
 
 <details>
 <summary><strong>Identified Weaknesses/Hallucinations</strong></summary>
