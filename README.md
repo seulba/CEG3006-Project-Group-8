@@ -157,9 +157,9 @@ This document records the team’s key design decisions from **Decision Log #1 t
 Based on our research, traffic accidents that caused injuries climbed by about 7% to 7,560 cases in 2025. Deaths from traffic accidents also rose from 139 cases in 2024 to 147 cases in 2025, showing a steady rise since 2022. In addition, red-light-running-related accidents rose by 27.1% from 2024 to 2025 (Sng, 2026). Based on this, the team evaluated and selected the targeted problem and user group.
 
 ### Options / Alternatives
-- Busy Junction
+- Busy Junction with Different Pedestrian Groups
 - Special Pedestrian Groups
-- Zebra Crossing
+- Zebra Crossing with Different Pedestrian Groups
 
 ### Evaluation Criteria
 - Relevance to the stated objective
@@ -1169,6 +1169,7 @@ Claims regarding “long battery life” are also vague, with no numerical bench
 <summary><strong>Yuankai</strong></summary>
 During the project, I played an active role in shaping the development of our V2P system by contributing ideas and helping to define how different parts of the system should work together. I was involved in exploring possible approaches for the system architecture and contributed to several decision logs, where I helped outline key design choices and considerations. I also spent time researching communication technologies such as BLE and DSRC to better understand their capabilities and limitations. This allowed me to support the team’s discussions with more informed input and ensure that our proposed solution remained realistic. Throughout the project, I worked closely with my teammates to refine our design and improve the overall clarity of our system. I also took initiative in reviewing certain parts of the work to ensure consistency. This project allowed me to develop a deeper understanding of vehicular communication concepts and how engineering design decisions are made, especially when balancing trade-offs and real-world constraints. It also helped me improve my ability to work effectively within a team and contribute to a more structured and organised design process.
 </details>
+
 <details>
 <summary><strong>Daniel</strong></summary>
 I contributed significantly to the project by actively participating in discussions and providing 
@@ -1181,10 +1182,12 @@ logically structured, technically sound and collaborated effectively with the te
 informed engineering decisions. It helped improve my analytical thinking skills and contribute to
 delivering a technical sound solution.
 </details>
+
 <details>
 <summary><strong>Khee Xuan</strong></summary>
 Throughout the project, I contributed actively alongside my teammates in developing and refining our V2P system. I was involved in multiple aspects of the project, including researching relevant technologies and concepts to ensure that our ideas were accurate and applicable to real-world scenarios. I also contributed to the development and refinement of system diagrams, as well as drafting several decision logs and refining others to ensure consistency across the project. In addition, I was involved in reviewing different parts of the work and validating our explanations so that they remained logical and aligned with the overall system design. During discussions, I worked closely with my teammates to evaluate ideas, identify potential gaps, and improve our solution. Overall, I contributed across various areas of the project and supported the team in ensuring that our final design was well-structured, coherent, and realistic. This project  helped me to better understand how each part of a project must align to create a coherent and realistic solution and good teamwork is not just about dividing tasks, but about communication, and helping one another.
 </details>
+
 <details>
 <summary><strong>Zelda Chua</strong></summary>
 Through this project, I actively contributed to discussions aimed at refining and managing the
@@ -1192,23 +1195,21 @@ project scope. I also supported the team by proposing possible options, identify
 considerations, and evaluating the trade-offs of different communication protocols and
 techniques. This played a part in helping us make informed decisions on the most appropriate
 approach to adopt. In addition, I helped ensure that our decisions remained logical and aligned
-with the overall flow of the system as the project progressed. Overall, this project gave me a
-deeper appreciation of the careful planning and critical considerations required to design a
-system that is coherent, efficient, and functional.
+with the overall flow of the system as the project progressed. Overall, this project gave me a deeper appreciation of the amount of careful planning and critical thought needed to design a system that is truly coherent, efficient, and functional. It made me realise that a good system does not come from simply combining different components, but from making deliberate decisions about how each part should work together
 </details>
+
 <details>
 <summary><strong>Syaakir</strong></summary>
 Throughout this project, I was able to work well with my team to develop our V2P system. We contributed together to different parts of the project, including the decision logs and overall system design. I was involved in working on some of the decision logs, such as refining how the system alerts drivers and how excessive alerts could affect performance. I also contributed to drafting one of the use cases, which was later refined with feedback from my team. I took part in discussions to better understand how the system works and to help identify any gaps in our idea. There were times where I was unsure about certain concepts, but my teammates helped to clarify them, and I was able to learn from both the project and the team. Overall, this project was a good learning experience for me as I got to work on the decision logs, system design, and use case drafting allowing me to gain a better understanding of vehicular communication systems and engineering design thinking.I also learnt the importance of teamwork, discussion, and feedback in improving our ideas.
 
 </details>
+
 <details>
 <summary><strong>Wenhui</strong></summary>
 I contributed to the overall development of the project by participating in discussions, idea generation and refining of the proposed V2P solution. I was involved in developing the decision logs, documenting the team’s design process, key technical decisions and trade offs throughout the project. I also helped ensure that the system design was clearly explained and logically structured. Throughout the project, I worked together with my teammates to evaluate different design options and make decisions based on feasibility and relevance to real world scenarios. This project helped me strengthen my understanding of vehicular communication systems and engineering design thinking, especially in considering trade offs and practical constraints. It also improved my ability to collaborate effectively in a team and contribute to a structured design process.
 </details>
 
 # References
-
-References
 
 Sng, E. (2026, February 26). Police Life | Traffic accidents rose in 2025. police.gov.sg. https://www.police.gov.sg/Media-Hub/Police-Life/2026/02/Traffic-Accidents-Rose-in-202
 
