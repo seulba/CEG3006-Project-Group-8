@@ -1056,10 +1056,11 @@ ChatGPT
 <details>
 <summary><strong>AI Prompts</strong></summary>
 AI Prompt 1:
-  
+
 AI Prompt 2:
 
 AI Prompt 3:
+
 </details>
 
 <details>
