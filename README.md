@@ -106,10 +106,10 @@ A nearby vehicle equipped with a compatible receiver then receives the alert, va
 | Vehicle-to-vehicle rebroadcast range | ~50 m | Range for forwarded warning to nearby vehicles |
 | Communication latency | Low-latency / near real-time | Important so vehicles can react early in blind-spot scenarios |
 | Bandwidth requirement | Low | Only short warning packets are transmitted, so high bandwidth is not required |
-| Power consumption | Low to moderate | Smartwatch should remain practical for wearable use |
-| Motion sensing response | Real-time / continuous monitoring | Sensors continuously monitor child movement |
+| Power consumption | Low | BLE consumes less energy making it viable for smartwatches |
+| Motion sensing response | Real-time | Sensors monitor for sudden child movement (running) |
 | Geofence trigger area | Predefined blind-spot / danger zone | Alert logic only activates in hazardous roadside areas |
-| Message lifetime (TTL) | Short duration | Prevents stale alerts from being rebroadcast indefinitely |
+| Message lifetime (TTL) | 500ms | Prevents stale alerts from being rebroadcast indefinitely |
 | Hop count | Limited | Controls how many times the warning can be forwarded |
 | Driver alert type | Visual and/or audio | Warning shown on dashboard or head unit |
 
