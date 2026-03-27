@@ -1050,6 +1050,27 @@ NA
 
 # AI Usage
 
+AI Tools Used:
+ChatGPT
+
+<details>
+<summary><strong>AI Prompts</strong></summary>
+AI Prompt 1:
+  
+AI Prompt 2:
+
+AI Prompt 3:
+</details>
+
+<details>
+<summary><strong>Identified Weaknesses/Hallucinations</strong></summary>
+AI Weakness 1:
+  
+AI Weakness 2:
+
+AI Weakness 3:
+
+</details>
 
 
 # Individual Reflections
