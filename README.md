@@ -27,11 +27,14 @@ Hence, based on these gaps, the proposed solution focuses specifically on child 
 <p align='center'>
 <img alt="image" src="https://github.com/user-attachments/assets/151f1925-3976-4ca6-bad5-b757e70b650b" width="500"/>
 </p>
-The proposed system architecture consists of three main subsystems: the pedestrian subsystem, the communication subsystem, and the vehicle subsystem. On the pedestrian side, a smartwatch worn by the child continuously monitors location and motion data using onboard sensors such as GPS, an accelerometer and a gyroscope. The smartwatch application checks whether the child is within a predefined geofenced blindspot or hazardous roadside zone and evaluates whether the child’s movement pattern indicates an approach toward the road.
 
-When the trigger conditions are met, the smartwatch generates a BLE-based warning message and broadcasts it to vehicles within range of 15metres. On the vehicle side, an On-Board Unit (OBU) or compatible head unit receives the message, validates its freshness and uniqueness, and displays a warning to the driver. To extend situational awareness, the first receiving vehicle may rebroadcast the warning to nearby vehicles within a range of 50metres. This forwarding process is controlled with a hop count of 2 hops and message expiry time of 1 minute to prevent unnecessary network congestion.
+The proposed system architecture is made up of three main parts: the pedestrian node, the communication layer, and the vehicle node. On the pedestrian side, a smartwatch application acts as the main sensing and decision unit. It uses the smartwatch’s built-in sensors and location services to monitor the child’s position and movement, while referencing predefined geofence data to determine whether the child is within a blind-spot or hazardous roadside area.
 
-In addition, the system uses predefined geofenced blindspot zones, which may be configured using stored coordinates representing hazardous crossing areas. These zones allow the smartwatch to apply context-aware alert triggering rather than relying solely on motion data.
+When the system detects a potentially dangerous situation, the smartwatch generates an alert packet and sends it through the communication layer using BLE. This serves as the first stage of the warning process, allowing nearby vehicles to receive the alert directly from the child’s device.
+
+On the vehicle side, the receiving vehicle processes the alert through its OBU or head unit. The vehicle validates the message, checks that it is new and relevant, and then displays a warning to the driver. To further improve awareness beyond the first receiving vehicle, the alert can also be forwarded to other nearby vehicles. This creates a wider safety warning zone around the child, especially in blind-spot situations where not all drivers may have direct visibility of the hazard.
+
+Overall, the architecture is designed to provide an early-warning mechanism by combining child-side sensing, short-range wireless alert transmission, and vehicle-side warning dissemination. The geofence database supports this process by giving the smartwatch location context, so alerts are triggered more intelligently rather than relying on motion data alone.
 
 ## Functions
 
