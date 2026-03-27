@@ -1053,7 +1053,29 @@ Overall, this discussion did not result in a single corrective solution, but ins
 
 
 # Individual Reflections
+<details>
+<summary><strong>Yuankai</strong></summary>
 
+</details>
+<details>
+<summary><strong>Daniel</strong></summary>
 
+</details>
+<details>
+<summary><strong>Khee Xuan</strong></summary>
+
+</details>
+<details>
+<summary><strong>Zelda Chua</strong></summary>
+
+</details>
+<details>
+<summary><strong>Syaakir</strong></summary>
+Throughout this project, I was able to work well with my team to develop our V2P system. We contributed together to the different parts of the project, including the decision logs and overall system design. I took part in discussions to better understand how the system works and to help identify any gaps in our idea. There were times where I was unsure about certain concepts, but my teammates helped to clarify them, and I was able to learn from both the project and the team. Overall, this project was a good learning experience for me, as I was able to improve my understanding of the topic while also working collaboratively with my team.
+</details>
+<details>
+<summary><strong>Wenhui</strong></summary>
+
+</details>
 
 # References
