@@ -1065,11 +1065,69 @@ AI Prompt 3:
 
 <details>
 <summary><strong>Identified Weaknesses/Hallucinations</strong></summary>
-AI Weakness 1:
-  
-AI Weakness 2:
+AI Hallucination 1 (Log 2):
+<p align='center'>
+<img alt=<img width="1141" height="1280" alt="image" src="https://github.com/user-attachments/assets/32a0e457-a3ef-448b-b437-e2381225677b" />
+</p>
 
-AI Weakness 3:
+<p align='center'>
+<img alt=<img width="1012" height="1212" alt="image" src="https://github.com/user-attachments/assets/7cf79b8b-0419-47f9-ac4b-22cb844149e4" />
+</p>
+
+<p align='center'>
+<img alt=<img width="1058" height="1280" alt="image" src="https://github.com/user-attachments/assets/396d8e52-5160-4322-8161-a4a207a924f1" />
+</p>
+
+Evaluation:
+A hallucination identified in the response of the AI is that the effectiveness of auditory cues for elderly pedestrians is overgeneralised, resulting in conclusions that may not fully reflect real-world conditions. For instance, the claim that sound cues can reliably alert pedestrians assumes uniform perception and attention, which does not account for differing ranges in hearing ability, environmental noise, or distractions surrounding that area. While these cues may be effective under controlled or ideal scenarios, however factors such as partial hearing loss, traffic noise, and pedestrian distraction can also significantly reduce the possibility of the audio cues being noticed or correctly interpreted. 
+As such, the assumption that auditory signals alone provide meaningful safety benefits represents overly optimistic estimation. A more grounded evaluation should consider the diversity in elderly sensory abilities and the environment to ensure the system’s effectiveness is realistic.
+
+
+AI Weakness 2 (Log 8):
+<p align='center'>
+<img alt=<img width="1031" height="1280" alt="image" src="https://github.com/user-attachments/assets/81298593-a6ae-412d-adcf-a029b1d6a65d" />
+</p>
+
+<p align='center'>
+<img alt=<img width="914" height="1280" alt="image" src="https://github.com/user-attachments/assets/bcfbda2d-2f91-456e-9418-226ae3d3855b" />
+</p>
+
+<p align='center'>
+<img alt=<img width="1020" height="1178" alt="image" src="https://github.com/user-attachments/assets/b899aa07-d11d-43b4-9443-8ff89c8ef4ec" />
+</p>
+
+<p align='center'>
+<img alt=<img width="1060" height="564" alt="image" src="https://github.com/user-attachments/assets/79d2b8d8-8a5f-4cf6-99ee-036731c68fb4" />
+</p>
+
+Evaluation:
+A weakness identified in the analysis is that several statements are overgeneralised, resulting in conclusions that may not be fully accurate within the context of V2P systems. 
+
+For instance, the claim that WiFi latency is typically under 10ms does not reliably reflect real-world conditions. While such latency may be achievable under ideal or controlled environments, practical deployments introduce additional factors that significantly affect overall performance. These include packet delays, channel access mechanisms, message transmission intervals and processing overhead. 
+
+When these factors are taken into account, the effective end-to-end latency for WiFi-based communication in V2P scenarios is more realistically within the range of 100 to 150ms. As such, the assumption of below 10ms latency represents an overly optimistic estimation, which may lead to misplaced confidence in the suitability of WiFi for time-critical V2P applications. A more grounded evaluation should consider real-world network behaviour to ensure that system design decisions are based on practical and achievable performance metrics. 
+
+https://support.astropad.com/en/articles/11835410-latency-and-expected-speeds-wifi-vs-wired-connections-explained
+
+
+AI Weakness 3 (Log 12):
+<p align='center'>
+<img alt=<img width="872" height="1280" alt="image" src="https://github.com/user-attachments/assets/ec383509-fd7e-4960-b612-4502107fd634" />
+</p>
+
+<p align='center'>
+<img alt=<img width="1066" height="988" alt="image" src="https://github.com/user-attachments/assets/77254348-5ee0-4ce7-a522-18e4942bf5e7" />
+</p>
+
+<p align='center'>
+<img alt=<img width="1064" height="1058" alt="image" src="https://github.com/user-attachments/assets/2b760665-c2f7-40db-aa55-bb0f0c1315f3" />
+</p>
+
+Evaluation:
+A weakness in the analysis is the lack of technical and environmental context for wearable devices in a V2P system. The discussion assumes ideal operation, but it does not consider real-world factors such as urban canyons that could affect GPS accuracy, battery drain under frequent location updates, or intermittent connectivity that could delay alerts. 
+
+Claims regarding “long battery life” are also vague, with no numerical benchmarks or consideration or trade-offs between functionality and energy consumption. Furthermore, the evaluation focuses on individual device features without addressing system-level integration, such as interoperability with vehicles, latency in transmitting critical alerts, or data privacy implications. Emphasis is placed on functional attributes like motion detection or alert notifications, but practical deployment challenges are largely overlooked. Causing the analysis to overstate the readiness and effectiveness of wearables for real-world pedestrian safety applications. 
+
 
 </details>
 
