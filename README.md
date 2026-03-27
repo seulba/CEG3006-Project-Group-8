@@ -257,7 +257,7 @@ This option was selected because it provides a clearer and more specific target 
 Most existing solutions focus on pedestrians as a general group and place minimal focus on child safety, which makes this a meaningful and relevant area for further research, with good potential to be refined into a more specific real-world scenario in later design stages. Compared to the other options, this direction offers a more focused foundation for developing an original concept while remaining feasible within the project scope.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Daniel
@@ -297,7 +297,7 @@ This option was selected because unpredictability in pedestrian movement is reco
 Within this broader issue, child pedestrians were considered especially relevant because their behaviour near roads is less consistent and more unpredictable (Sewalkar & Seitz, 2019). Therefore, it is more difficult for drivers and vehicle systems to anticipate their movement quickly. Even though predicting a child’s behaviour may not be easy, reducing the likelihood of accidents remains essential. As a result, this problem was seen as a meaningful and researchable direction that could support the development of a more focused V2P safety concept.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Daniel
@@ -339,7 +339,7 @@ In junction and zebra crossing situations, drivers are generally more likely to 
 This significantly reduces the available reaction time and increases the likelihood of a collision. The team also noted that examples of such accidents can be found in real-world incident footage. Overall, it was collectively agreed that blind-spot scenarios represent a more critical and realistic situation for the concept to address moving forward.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Daniel
@@ -389,7 +389,7 @@ However, the team acknowledged that machine learning may still be a useful suppo
 Overall, behaviour-based detection was considered the most appropriate primary option at this initial stage of development, especially since there would not be enough collected data to train a robust model properly. It remains more feasible within the project scope and offers a more focused way to respond to sudden child movement in blind-spot scenarios.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Wen Hui
@@ -446,7 +446,7 @@ Always-on proximity alerts were not chosen because they are likely to produce a 
 Overall, the multi-condition trigger was considered the most suitable option because it improves the relevance of warnings, reduces unnecessary alerts, and supports earlier detection of genuinely risky behaviour, making the system more practical and trustworthy for real-world use.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Wen Hui
@@ -557,7 +557,7 @@ The full-context message was not selected because including historical movement 
 Overall, the priority safety message was considered the most appropriate option because it balances practical risk-related information with low communication overhead, allowing alerts to remain fast, focused, and more suitable for real-time warning in the selected blind-spot child pedestrian scenario. At this stage, this decision helped establish the core form of the proposed alerting approach.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Wen Hui
@@ -611,7 +611,7 @@ An app-based identification approach was likewise considered feasible, as a smar
 Overall, the combined wearable + app approach was considered a useful refinement to the emerging proposed concept, as it improves the reliability of identifying whether the pedestrian is a child while remaining practical and compatible with the wider system design. This decision strengthened the concept by providing a clearer way to distinguish child users from general pedestrians.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Zelda
@@ -663,7 +663,7 @@ In comparison, the combined approach was considered more effective because it im
 Overall, the combined V2P and V2V approach was considered an important refinement to the concept, as it enhances the warning pathway beyond direct child-to-vehicle communication alone. This decision improved the robustness of the proposed system by extending alert propagation to other approaching vehicles, particularly in blind-spot scenarios where direct awareness may be limited.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Yuankai
@@ -730,7 +730,7 @@ The smartwatch was further seen as advantageous because it remains wrist-based, 
 Therefore, the smartwatch was determined to be the most suitable option as it not only supports reliable child identification, but also enhances the system’s ability to capture, analyse, and respond to child movement behaviour in a meaningful and practical way. As a refinement to the existing concept, the smartwatch can act as a more capable platform for strengthening sensing, communication, and context awareness within the overall system.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Zelda
@@ -795,7 +795,7 @@ For deployment and manufacturing, no fixed infrastructure installation is requir
 Overall, the discussion highlighted that the concept remains feasible from a cost perspective, especially if it leverages already-owned smartphones and avoids extensive infrastructure deployment. However, the choice between a tag and a smartwatch would involve a trade-off between lower cost and richer sensing capability.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Wen Hui
@@ -850,7 +850,7 @@ The team also decided to use a **combination of visual and audio alerts**. A vis
 Overall, the use of the OBU was considered a useful refinement to the concept because it improves how the warning is delivered to the driver after the alert has already been transmitted and received.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Yuankai
@@ -983,7 +983,7 @@ The 50-metre distance threshold was selected to limit the communication range to
 Overall, congestion is reduced by limiting BLE communication to only a 0.5-second timeout threshold. The short timeout ensures that only timely and useful warnings are transmitted, instead of outdated messages that may no longer help the driver. At the same time, the 50-metre range restricts alerts to nearby vehicles, preventing unnecessary message broadcasting to vehicles that are too far away to be affected. As a result, the system reduces communication overload, improves the relevance of alerts, and helps prevent network congestion while still maintaining effective safety awareness among nearby vehicles.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Khee Xuan
@@ -1035,7 +1035,7 @@ The team also noted the environmental limitations of BLE communication, particul
 Overall, this discussion did not result in a single corrective solution, but instead served to document the key limitations that must be acknowledged as part of the concept’s development. While communication failure was viewed as the most critical limitation, the team recognised that sensor accuracy, message delay, and environmental communication constraints all remain important factors that together determine whether the proposed system would be practical, reliable, and robust in real-world application.
 
 ### AI Usage
--
+NA
 
 ### Team Members
 - Yuankai
