@@ -1160,16 +1160,30 @@ During the project, I played an active role in shaping the development of our V2
 </details>
 <details>
 <summary><strong>Daniel</strong></summary>
-
+I contributed significantly to the project by actively participating in discussions and providing 
+valuable ideas for the V2P implementation. I assisted in documenting the team’s design
+process, including decision logs that captured trade offs between different communication
+protocols, safety mechanisms and real world constraints. I contributed to the evaluation of
+technical alternatives, analysing feasibility and assessing potential impacts on system
+performance and reliability. Throughout the project, I helped ensure the design was both
+logically structured, technically sound and collaborated effectively with the team to make
+informed engineering decisions. It helped improve my analytical thinking skills and contribute to
+delivering a technical sound solution.
 </details>
 <details>
 <summary><strong>Khee Xuan</strong></summary>
 Throughout the project, I contributed actively alongside my teammates in developing and refining our V2P system. I was involved in multiple aspects of the project, including researching relevant technologies and concepts to ensure that our ideas were accurate and applicable to real-world scenarios. I also contributed to the development and refinement of system diagrams, as well as drafting several decision logs and refining others to ensure consistency across the project. In addition, I was involved in reviewing different parts of the work and validating our explanations so that they remained logical and aligned with the overall system design. During discussions, I worked closely with my teammates to evaluate ideas, identify potential gaps, and improve our solution. Overall, I contributed across various areas of the project and supported the team in ensuring that our final design was well-structured, coherent, and realistic.
-
 </details>
 <details>
 <summary><strong>Zelda Chua</strong></summary>
-
+Through this project, I actively contributed to discussions aimed at refining and managing the
+project scope. I also supported the team by proposing possible options, identifying key
+considerations, and evaluating the trade-offs of different communication protocols and
+techniques. This played a part in helping us make informed decisions on the most appropriate
+approach to adopt. In addition, I helped ensure that our decisions remained logical and aligned
+with the overall flow of the system as the project progressed. Overall, this project gave me a
+deeper appreciation of the careful planning and critical considerations required to design a
+system that is coherent, efficient, and functional.
 </details>
 <details>
 <summary><strong>Syaakir</strong></summary>
