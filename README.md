@@ -8,6 +8,16 @@
 
 ## Literature Review
 
+Vehicle-to-Pedestrian (V2P) safety systems have been proposed as a way to reduce collisions involving vulnerable road users by allowing pedestrians and vehicles to exchange real-time information such as location, speed, and direction. A recent study by Certad et al (2025), found that current V2P systems still face an important limitation: they often do not adequately account for the uncertainty and unpredictability of pedestrian behaviour, which can reduce the accuracy of collision-risk prediction. The paper also showed that V2P warnings can be more effective than conventional auditory warnings, particularly when pedestrians are distracted by smartphone use or headphones. 
+
+Sewalkar et al (2019), also noted that V2P communication identifies children as a particularly challenging pedestrian group due to their tendency to move suddenly, change direction unpredictably, and exhibit less consistent road behaviour. This further notes that although smartphones are widely adopted in V2P systems because of their embedded sensors and communication functions, they may not always be the most appropriate standalone device for child pedestrians, thereby creating potential for supplementary wearable devices such as tags or smartwatches. Furthermore, while smartphone-based V2P communication offers practical implementation advantages, its effectiveness may be influenced by factors such as signal obstruction, link quality, and communication delay. 
+
+Similarly, Gelbal et al (2024), proposed a smartphone-based V2P safety system that uses mobile-phone sensors to predict pedestrian motion and communicate warnings via Bluetooth and internet-based connectivity. Their work demonstrates the feasibility of using phone sensor data for pedestrian motion prediction and driver warning, but it focuses mainly on general pedestrian safety rather than a child-specific use case.
+
+Hence, based on these gaps, the proposed solution focuses specifically on child pedestrians by combining a wearable watch/tag and smartphone sensing. The wearable can provide child-specific context such as age, while the smartphone contributes motion data to detect sudden running behaviour. Unlike existing solutions, the system also introduces a second warning layer, where nearby vehicles can further relay the alert to other approaching vehicles through low-latency V2V communication to extend warning coverage to nearby vehicles that do not yet have direct line-of-sight to the child or blind spot scenarios.
+
+
+
 ## System Architecture
 
 <p align='center'>
