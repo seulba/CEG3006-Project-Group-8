@@ -85,7 +85,34 @@ The system begins by continuously monitoring the child’s location and motion d
 A nearby vehicle equipped with a compatible receiver then receives the alert, validates the message, and warns the driver through the vehicle dashboard or head unit. To improve awareness for approaching vehicles, the first receiving vehicle may rebroadcast the message to nearby vehicles within a range of 50metres. The forwarding process is controlled using message expiry time and hop count to prevent excessive rebroadcasting.
 
 
-## Hardware Components
+## Hardware Components and Parameters
+
+| Component | Role in System | Communication / Sensor Type | Key Parameters | Notes |
+|---|---|---|---|---|
+| Smartwatch | Worn by child to monitor movement and trigger alerts | Accelerometer, gyroscope, GPS, BLE | Motion sensing: continuous; BLE alert range: ~15 m; GPS accuracy: location-dependent; Trigger latency: low | Runs the proposed child safety application and performs geofence + motion-based risk detection |
+| Accelerometer | Detects sudden movement or acceleration changes | Motion sensor | Sampling rate: configurable; Low data rate; Very low latency | Used to detect sudden running or movement toward the road |
+| Gyroscope | Monitors change in orientation and motion behaviour | Motion sensor | Sampling rate: configurable; Low data rate; Very low latency | Supports motion pattern analysis together with the accelerometer |
+| GPS / Location Service | Determines whether child is within predefined blind-spot / danger zone | Location sensing | Range: global; Accuracy: environment-dependent; Update latency: moderate | Used for geofencing, but may be less accurate in dense urban areas |
+| BLE Module (Smartwatch) | Broadcasts child-risk alert to nearby vehicles | Bluetooth Low Energy | Range: ~15 m; Low bandwidth; Low power; Low latency | Used for short-range V2P alert transmission from the smartwatch |
+| Vehicle OBU / Head Unit | Receives smartwatch alert and warns the driver | BLE receiver + in-vehicle interface | Alert reception latency: low; Short-range reception | Processes alert packet and displays warning on dashboard/head unit |
+| Vehicle Dashboard / HMI | Displays warning to the driver | Visual / audio interface | Alert display latency: near real-time | Can show messages such as "Child approaching road ahead" |
+| Vehicle V2V Communication Module | Rebroadcasts warning to nearby vehicles | V2V wireless communication | Rebroadcast range: ~50 m; Low-latency communication; Bandwidth depends on V2V technology | Extends the warning beyond the initial smartwatch BLE range |
+| Smartphone / Admin Device | Used only for setup, profile creation, or app configuration | App configuration interface | Not required during live operation | Can be used to register child profile and set danger zones if needed |
+
+
+| Parameter | Proposed Value / Target | Description |
+|---|---|---|
+| Smartwatch-to-vehicle alert range | ~15 m | BLE transmission range for the initial child-risk alert |
+| Vehicle-to-vehicle rebroadcast range | ~50 m | Range for forwarded warning to nearby vehicles |
+| Communication latency | Low-latency / near real-time | Important so vehicles can react early in blind-spot scenarios |
+| Bandwidth requirement | Low | Only short warning packets are transmitted, so high bandwidth is not required |
+| Power consumption | Low to moderate | Smartwatch should remain practical for wearable use |
+| Motion sensing response | Real-time / continuous monitoring | Sensors continuously monitor child movement |
+| Geofence trigger area | Predefined blind-spot / danger zone | Alert logic only activates in hazardous roadside areas |
+| Message lifetime (TTL) | Short duration | Prevents stale alerts from being rebroadcast indefinitely |
+| Hop count | Limited | Controls how many times the warning can be forwarded |
+| Driver alert type | Visual and/or audio | Warning shown on dashboard or head unit |
+
 
 ## Real-life Scenario Use Case
 <p align='center'>
@@ -592,6 +619,434 @@ Overall, the combined wearable + app approach was considered a useful refinement
 - Syaakir
 
 </details>
+
+---
+
+<details>
+<summary><strong>Decision Log #11 — Extending the Warning Path with V2V Relaying</strong></summary>
+
+### Date
+22/03/2026
+
+### Trigger / Problem
+Another issue identified after Decision Log #8 was that, although BLE appeared suitable for short-range smartphone-based V2P communication due to its practicality, low power usage, and support on common smartphones, the direct child-to-vehicle link alone might not be sufficient in blind-spot situations. In such cases, not all approaching vehicles may receive the child’s alert early enough, especially if they are farther away, partially occluded, or not yet within effective first-hop communication range.
+
+For this stage of concept development, the team also assumed that vehicles within the selected area or scenario would be capable of receiving BLE-based alerts from the child pedestrian device, and that vehicles would also be able to communicate with one another through a suitable V2V communication method. This assumption was necessary in order to evaluate whether a layered warning approach could be feasible in the selected scenario.
+
+At the same time, DSRC / IEEE 802.11p is commonly associated with low-latency V2V safety communication, but it is generally not supported directly by smartphones. After reviewing the lecture slides on DSRC (IEEE 802.11p), the team noted that DSRC operates at low transmission latency. Nevertheless, it was also recognised that future developments in V2X-capable mobile devices, 5G-based C-V2X, or sidelink communication may make direct low-latency pedestrian-device communication more feasible in later implementations.
+
+Hence, the team considered whether a second safety layer could be introduced, whereby the vehicle closest to the child pedestrian first receives the safety alert and subsequently relays the warning to other approaching vehicles through low-latency V2V communication. Such an approach could improve warning propagation in situations where a child suddenly runs into traffic and vehicles further away may not yet have direct awareness of the risk. The team therefore needed to evaluate whether a combined V2P and V2V communication approach would be more suitable than relying solely on a direct child-to-vehicle alert.
+
+### Options / Alternatives
+- **Infrastructure-based communication then to vehicles**  
+  The child pedestrian’s alert is first transmitted through roadside infrastructure, such as an RSU or cloud-based system, before being forwarded to vehicles.
+- **Combination of V2P and V2V communication**  
+  The child pedestrian’s device sends the initial safety alert to a nearby vehicle, which then relays the warning to other approaching vehicles through V2V communication as a multi-hop message.
+
+### Evaluation Criteria
+- Latency of message delivery
+- Warning coverage range
+- Reliability in blind-spot situations
+- Dependency on external infrastructure
+- Feasibility with current smartphone limitations
+- Suitability for safety-critical communication
+
+### Decision and Rationale
+The team decided to prioritise a **combination of V2P and V2V communication** for further concept development.
+
+This option was considered more suitable because it allows the initial alert to be transmitted directly from the child pedestrian device to a nearby vehicle using smartphone-supported V2P communication, while also extending the warning to other approaching vehicles through low-latency V2V relaying.
+
+Direct V2P communication alone was not chosen as the only approach because its effectiveness may be limited by first-hop range, occlusion, and the possibility that not all relevant vehicles will receive the alert early enough in a blind-spot scenario. In particular, while the nearest vehicle may still receive the warning, vehicles further away or with less direct awareness of the child pedestrian may not be alerted in sufficient time if the system depends only on a direct child-to-vehicle link.
+
+In comparison, the combined approach was considered more effective because it improves both initial detection and warning propagation. Once the nearest vehicle receives the child’s alert, it can act as a relay to forward the warning to other approaching vehicles, helping to extend coverage beyond the original first-hop communication range. This was seen as especially relevant in the selected blind-spot child pedestrian scenario, where some drivers may not yet have direct visibility of the child or awareness of the risk.
+
+Overall, the combined V2P and V2V approach was considered an important refinement to the concept, as it enhances the warning pathway beyond direct child-to-vehicle communication alone. This decision improved the robustness of the proposed system by extending alert propagation to other approaching vehicles, particularly in blind-spot scenarios where direct awareness may be limited.
+
+### AI Usage
+-
+
+### Team Members
+- Yuankai
+- Daniel
+- Khee Xuan
+- Zelda
+- Syaakir
+- Wen Hui
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #12 — Selecting the Wearable Device Type</strong></summary>
+
+### Date
+24/03/2026
+
+### Trigger / Problem
+Based on Decision Log #10 and its evaluation, the next step was to determine which type of wearable device would be most suitable for integration into the proposed system. This became an important consideration because, although the team had already identified the value of using a wearable to improve child-user identification and system reliability, the exact form of the wearable had not yet been decided.
+
+Different wearable form factors may provide different strengths and limitations in terms of sensor capability, communication support, usability, comfort, and practicality for children. Some devices may be more suitable for continuous wearing and easier for children to keep with them consistently, while others may offer better sensing or communication functions but be less convenient for everyday use. Since the proposed concept depends not only on identifying the user as a child, but also potentially supporting motion detection and transmission of alert-related data, the choice of wearable could have a direct impact on the overall feasibility and effectiveness of the system.
+
+In addition, the team also needed to consider whether the wearable should play a more active role in the wider system by contributing sensor data and supporting communication with the smartphone, application, or nearby vehicles. Therefore, this decision was necessary to refine the concept further and ensure that the selected wearable type would be compatible with both the intended user group and the broader system design.
+
+### Options / Alternatives
+- **Wearable Tags (clip-on / bag-based)**  
+  - Long battery life  
+  - Discrete and lightweight  
+  - Low cost and scalable  
+  - Can capture GPS and basic motion
+- **Neck-worn Trackers**  
+  - Long battery life  
+  - Compatible with apps  
+  - Can capture GPS and basic motion  
+  - Includes safety features such as SOS alerts and geofencing
+- **Wrist-based Trackers**  
+  - Discrete and hard to remove  
+  - Ensures consistent tracking as it is always worn  
+  - Can capture GPS and basic motion
+- **Smartwatch**  
+  - Able to capture rich sensor data  
+  - Enables detection of behavioural patterns  
+  - Supports real-time communication  
+  - Compatible with apps
+
+### Evaluation Criteria
+- Ability to capture rich sensor data
+- Compatibility with apps for configuration and integration
+- Ease of use and setup for both children and guardians
+- Comfort and wearability for everyday use
+- Suitability for real-world deployment in child safety scenarios
+
+### Decision and Rationale
+The team decided to proceed with the **smartwatch-based wearable** as the primary device.
+
+This decision was made because the smartwatch provides the most comprehensive set of capabilities aligned with the system’s objectives. It is able to capture rich, multi-dimensional sensor data, which is important for analysing and interpreting the child’s movement and behaviour in real time.
+
+Compared to the other options, wearable tags and wrist-based trackers were recognised as practical, lightweight, and potentially more energy-efficient, but they were considered more limited in functionality, as they generally focus on basic location tracking and simple motion data. While these features may support identification and basic monitoring, they were seen as less suitable for capturing the richer movement-related information needed for the wider concept. Neck-worn trackers were also considered useful because they may include additional safety-related functions such as SOS alerts and geofencing, but they were similarly viewed as more limited in sensing capability compared to a smartwatch.
+
+The smartwatch was further seen as advantageous because it remains wrist-based, allowing relatively consistent physical contact with the child during everyday use. This may support more stable and reliable data collection compared to wearable forms that may be removed, loosely attached, or carried separately. In addition, a smartwatch can support real-time communication and integrate more easily with a companion mobile application, which fits well with the broader system architecture discussed in earlier logs. Through app integration, functions such as geofencing may also be supported, which could help provide additional location-based context and improve how proximity to roadside risk areas is interpreted. Since the proposed concept also considers BLE-based communication, the smartwatch was seen as a practical device type that could operate effectively within a low-power communication framework.
+
+Therefore, the smartwatch was determined to be the most suitable option as it not only supports reliable child identification, but also enhances the system’s ability to capture, analyse, and respond to child movement behaviour in a meaningful and practical way. As a refinement to the existing concept, the smartwatch can act as a more capable platform for strengthening sensing, communication, and context awareness within the overall system.
+
+### AI Usage
+-
+
+### Team Members
+- Zelda
+- Yuankai
+- Khee Xuan
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #13 — Evaluating Cost and Deployment Feasibility</strong></summary>
+
+### Date
+25/03/2026
+
+### Trigger / Problem
+As the system concept became more defined, there was a need to evaluate the practical cost and feasibility of deploying the proposed system. While the technical decisions had been largely established, there had been no detailed consideration of the cost implications of the required hardware and software components, nor the broader costs associated with deployment and ongoing maintenance.
+
+This was especially necessary to ensure that the proposed system remains realistic and scalable for real-world usage.
+
+### Options / Alternatives
+- **Potential needed hardware costs**
+  - Smartphone: assumed already owned by family, no additional procurement cost
+  - BLE tag: estimated SGD20–40 per unit (retail), bill of materials USD5–11 per unit
+  - Smartwatch: estimated SGD50–150 per unit (retail), bill of materials USD20–50 per unit
+
+- **Potential needed software costs**
+  - App development: custom V2P safety application with motion detection, BLE advertising, and alert transmission logic
+  - App updates and maintenance: ongoing OS compatibility patches, bug fixes, feature updates
+  - Licensing:
+    - Apple App Store: USD99/year
+    - Google Play: estimated USD25 one time
+    - BLE stack licensing: estimated USD1–3 per unit royalty
+    - Watch platform SDK fees: estimated USD500–2000 depending on platform
+  - Cloud/backend hosting: estimated USD10–50/month at small scale if server-side components are used
+  - Map/location API fees: estimated USD7 per 1000 requests beyond free tiers
+  - Data privacy and compliance: possible legal consultation or auditing cost if child-related data is collected and stored
+  - Push notification services: often free at low volume, but may incur costs at scale
+
+- **Other costs**
+  - Manufacturing and factory costs: PCB assembly, enclosure moulding, production at scale for tag/smartwatch
+  - Deployment costs: physical distribution and registration of wearable
+  - Maintenance costs: tag battery replacement every 6–12 months, smartwatch charging and firmware updates, smartphone app updates
+
+### Evaluation Criteria
+- Unit cost and total deployment cost
+- Bill of materials and manufacturing feasibility at scale
+- Software development and licensing costs
+- Ease of distribution and setup
+- Ongoing maintenance requirements
+
+### Decision and Rationale
+For hardware, the smartphone was assumed to already be owned by the family, meaning no additional procurement or manufacturing cost would be incurred for this component. The application would handle motion data collection and BLE-based V2P alert transmission. Since modern mid-range smartphones, estimated at around SGD300–500, already support BLE and the required sensors, this component was considered practically accessible for many families in Singapore.
+
+For the wearable, the team evaluated two sub-options. A dedicated BLE tag, similar to Tile trackers or Apple AirTag, adds only a minimal incremental hardware cost, with bill of materials estimated at approximately USD5–11 per unit, comprising a BLE SoC such as the Nordic nRF52 series at roughly USD2–4. At retail, this translates to an estimated low unit cost of approximately SGD20–40, which is highly affordable and scalable. At larger production volumes, unit manufacturing costs would decrease further due to economies of scale, improving overall cost viability. A children’s smartwatch was considered as an alternative wearable, but its higher bill of materials of approximately USD20–50 per unit and retail price of SGD50–150 per unit make it comparatively more expensive.
+
+For software, the primary development effort is concentrated in the smartphone application which handles motion data, child identification logic, and BLE alert transmission. An open-source BLE stack such as Zephyr RTOS is available at no licensing cost, avoiding per-unit royalty fees associated with proprietary stacks. App store distribution fees are minimal, limited to the Apple Store annual fee of approximately USD99 and a one-time Google Play fee of USD25. If the smartwatch option is adopted, additional platform SDK licensing costs of approximately USD500–2000 may apply depending on the watch platform. Ongoing software maintenance costs are expected to be low to moderate, mainly consisting of periodic application updates for OS compatibility and bug fixes.
+
+For deployment and manufacturing, no fixed infrastructure installation is required, which helps keep deployment costs low. A tag requires physical distribution and initial registration by a parent or guardian, which introduces some logistics cost. At manufacturing level, the tag’s simple construction consists mainly of a BLE SoC, PCB, battery, and enclosure, whereas the smartwatch requires additional components such as a display, GPS module, and integrated sensors. Ongoing maintenance is similarly low for the tag option, limited primarily to battery replacement approximately every 6–12 months depending on the BLE advertising interval, together with periodic application updates.
+
+Overall, the discussion highlighted that the concept remains feasible from a cost perspective, especially if it leverages already-owned smartphones and avoids extensive infrastructure deployment. However, the choice between a tag and a smartwatch would involve a trade-off between lower cost and richer sensing capability.
+
+### AI Usage
+-
+
+### Team Members
+- Wen Hui
+- Khee Xuan
+- Zelda
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #14 — Selecting the Driver Alert Delivery Method</strong></summary>
+
+### Date
+25/03/2026
+
+### Trigger / Problem
+Alerts can be further relayed between vehicles through V2V communication such as DSRC to extend warning coverage. However, there was still a need to determine how the driver should receive and interpret these alerts once the vehicle receives them. The team therefore considered whether alerts should be delivered through the driver’s smartphone or directly through the vehicle’s OBU.
+
+In addition, the team needed to assess how the alert should be presented to the driver so that it is both noticeable and effective, particularly in blind-spot situations where reaction time is limited. The system must also account for whether the alert itself may startle the driver, as this could either improve reaction time or negatively affect the driver’s response.
+
+### Options / Alternatives
+- **Smartphone-based alert**
+  - Easier to implement
+  - No need for special vehicle hardware
+  - Works with existing phones
+- **OBU visual alert**
+  - Clear and informative
+  - Device is already right in front of the driver’s view
+  - Not too disruptive
+- **OBU audio alert**
+  - Grabs attention immediately
+  - Good for urgent situations
+- **Combination of visual and audio alerts through OBU**
+  - Driver may react faster with audio alert
+  - Clear warning shown on the OBU
+  - More realistic for a safety application
+
+### Evaluation Criteria
+- Driver reaction time
+- Clarity and visibility of the alert
+- Ease of interpretation while driving
+- Feasibility of implementation
+
+### Decision and Rationale
+Based on the team’s discussion, it was decided that the vehicle’s **OBU** would be prioritised as the primary method for alerting the driver. Compared to smartphone-based alerts, the OBU was considered more reliable because it is directly integrated into the vehicle environment, making it more likely that the driver will notice warnings presented through the dashboard, head unit, or another in-vehicle interface.
+
+At this stage, the team assumed that the vehicle would be equipped with a system capable of receiving BLE-based alerts from nearby devices, and that these alerts could be passed to the vehicle’s OBU or dashboard system for driver notification. This assumption allowed the concept to remain compatible with smartphone-based V2P communication while still making use of a more practical in-vehicle warning mechanism.
+
+The team also decided to use a **combination of visual and audio alerts**. A visual warning would provide clear on-screen information to the driver, while a controlled audio cue would help attract immediate attention. However, the audio alert should be designed carefully so that it is noticeable without being overly abrupt or startling, as excessive alarm intensity may negatively affect driver response.
+
+Overall, the use of the OBU was considered a useful refinement to the concept because it improves how the warning is delivered to the driver after the alert has already been transmitted and received.
+
+### AI Usage
+-
+
+### Team Members
+- Yuankai
+- Syaakir
+- Daniel
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #15 — Adding Geofencing to Improve Location Context</strong></summary>
+
+### Date
+26/03/2026
+
+### Trigger / Problem
+At this stage of development, the team was operating under the assumptions that the child would be wearing a BLE-capable smartwatch, that the target use case would occur primarily on low-speed urban or residential roads, and that forwarded alerts would be limited by time and hop count to control network congestion. Within these assumptions, the current concept was relying mainly on motion data from the smartwatch to detect sudden movement changes and trigger alerts to nearby vehicles.
+
+However, the team realised that this motion-based approach alone is not sufficient to determine the child’s actual location context. As a result, the system cannot distinguish whether the child is genuinely approaching the road, waiting near a blind spot or hazardous crossing area, or simply moving quickly in a non-dangerous location. This may cause the application to repeatedly send unnecessary alerts whenever the motion threshold is exceeded, increasing the likelihood of false positives and reducing the reliability of the system.
+
+### Options / Alternatives
+- Add a manual user trigger to activate alerts only when needed
+- Implement geofencing so that motion-based alerts are only triggered when the child is within predefined blind-spot or danger zones
+- Combine geofencing with motion data and direction analysis for more context-aware alert triggering
+
+### Evaluation Criteria
+- Ability to reduce false alerts
+- Ability to identify whether the child is in a hazardous roadside area
+- Practicality of implementation on a smartwatch
+- Reliability for real-time warning scenarios
+- Suitability for blind-spot and danger zone use cases
+
+### Decision and Rationale
+The selected solution was to implement **geofencing together with the existing motion-based detection**.
+
+In this approach, predefined blind spots or danger zones are first configured in the system using location boundaries. The smartwatch application then continuously checks whether the child is within one of these zones. Only when the child is inside a defined hazardous area will the motion data be evaluated to determine whether an alert should be triggered.
+
+This solution was selected because geofencing adds important location context that is missing in the current motion-only approach. By limiting alert generation to predefined high-risk areas, the system can better distinguish between normal child movement and movement that may actually indicate road-crossing risk. This helps reduce unnecessary warnings, improves system reliability, and makes the alert mechanism more relevant to the intended blind-spot safety scenario.
+
+Overall, the integration of geofencing strengthens the system by ensuring that alerts are triggered based on both **where** the child is and **how** the child is moving, rather than motion alone.
+
+### AI Usage
+AI was used to generate ideas on how the team could better determine the actual location of the child.
+
+### Team Members
+- Yuankai
+- Khee Xuan
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #16 — Selecting the Communication Exchange Method</strong></summary>
+
+### Date
+26/03/2026
+
+### Trigger / Problem
+To ensure the communication process is efficient and suitable for the intended safety application, the team needed to determine what type of communication exchange method would best support the system. Since the concept is designed to send urgent alerts to nearby vehicles in time-critical situations, this was important to ensure that the communication process remains reliable, efficient, and appropriately aligned with the specific challenges of the child pedestrian safety scenario being addressed.
+
+### Options / Alternatives
+- Handshake protocol
+- Broadcast protocol
+- Scan response
+- Pairing
+- DSRC
+
+### Evaluation Criteria
+- Ensure optimal and efficient communication between the devices based on system requirements
+- Suitability for time-critical safety communication
+- Communication efficiency
+
+### Decision and Rationale
+The **broadcast protocol** was selected as the most suitable communication approach for this system.
+
+Smart devices would utilise broadcasting to transmit messages to nearby vehicles, ensuring that the closest vehicles receive the alert with minimal delay. Once a vehicle receives the message, it can then leverage DSRC to propagate the information to following vehicles, enabling efficient and timely dissemination of warnings along the traffic flow.
+
+For scan response, the team noted that there was no need for the receiving vehicle to request additional data, since the communication is intended to be primarily one-way, with vehicles simply receiving the alert and taking note of the situation. Therefore, including scan response was considered unnecessary for the intended application.
+
+The team also considered whether the system required the receiver to acknowledge the transmitted message. For this use case, acknowledgement and pairing were not considered necessary. If a nearby vehicle fails to receive the initial broadcast, establishing a handshake or pairing would not be practical, as the broadcasting device is expected to continue transmitting the message repeatedly for a limited period. Attempting to perform a handshake or pairing would introduce additional delay, which would be undesirable in situations where the child may already be at immediate risk. Furthermore, if the receiver is unable to receive the message or pairing fails, the sender has limited recovery options beyond retransmitting it. In this context, continuous broadcasting was considered the more effective approach.
+
+The main drawback, however, is that repeated broadcasting may increase channel congestion, especially in environments where there are many nearby devices or vehicles. This was recognised as an important limitation to take note of.
+
+### AI Usage
+AI was used to generate alternative options besides broadcasting and handshake protocol.
+
+### Team Members
+- Khee Xuan
+- Daniel
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #17 — Controlling Alert Lifetime and Relay Range</strong></summary>
+
+### Date
+26/03/2026
+
+### Trigger / Problem
+To address congestion, the system must define a time threshold after which the child is no longer classified as an immediate threat, and also determine the range within which the vehicle is required to relay its messages.
+
+Following the implementation of V2P and V2V communication, the team identified a potential issue regarding message propagation and network congestion. If alerts are continuously relayed between vehicles without limitation, it may result in unnecessary network overload and outdated warnings being transmitted.
+
+Therefore, the team had to determine how long a child pedestrian should be considered a threat after the initial detection, as well as the range within which vehicles should continue relaying the alert message.
+
+### Options / Alternatives
+- **Fixed time threshold**  
+  Alerts expire after a set duration
+- **Distance-based threshold**  
+  Alert is only relayed within a certain range
+- **Hop-based limitation**  
+  Limit the number of times a message can be forwarded between vehicles
+- **Combination of both time and distance-based control**
+
+### Evaluation Criteria
+- Evaluation would be based on what is needed for the system
+- Ensuring optimal communication between the devices
+
+### Decision and Rationale
+The team decided to use a **fixed timeout threshold of 0.5 seconds** and a **distance-based threshold of 50 metres** for DSRC communication between vehicles.
+
+The 0.5-second timeout was chosen because any delay longer than this may reduce the usefulness of the warning. After around 0.5 seconds, the driver would likely have already seen the pedestrian or hazard approaching, and any alert sent after that point could be too late to support a meaningful reaction. Therefore, a shorter timeout helps ensure that the warning remains relevant and timely in a safety-critical situation.
+
+The 50-metre distance threshold was selected to limit the communication range to only nearby vehicles that need to be aware of the situation. This helps focus the DSRC system on vehicles within a relevant proximity, instead of notifying vehicles that are too far away for the warning to be useful. By restricting the range to 50 metres, the system can reduce unnecessary alerts and make the communication more targeted and practical for immediate road safety purposes.
+
+Overall, congestion is reduced by limiting BLE communication to only a 0.5-second timeout threshold. The short timeout ensures that only timely and useful warnings are transmitted, instead of outdated messages that may no longer help the driver. At the same time, the 50-metre range restricts alerts to nearby vehicles, preventing unnecessary message broadcasting to vehicles that are too far away to be affected. As a result, the system reduces communication overload, improves the relevance of alerts, and helps prevent network congestion while still maintaining effective safety awareness among nearby vehicles.
+
+### AI Usage
+-
+
+### Team Members
+- Khee Xuan
+- Wen Hui
+- Yuankai
+- Zelda
+
+</details>
+
+---
+
+<details>
+<summary><strong>Decision Log #18 — Identifying Key System Limitations</strong></summary>
+
+### Date
+27/03/2026
+
+### Trigger / Problem
+As the concept became more developed, the team recognised that the proposed system may still face several practical limitations in real-world operation. Since the solution depends on sensor readings, wireless communication, and timely alert delivery, its effectiveness could be affected by signal loss, communication breakdown, packet delay, or inaccurate sensing of child movement. It was therefore important to identify the main limitations of the concept and reflect on how these issues could influence the overall feasibility, safety, and robustness of the system.
+
+### Options / Alternatives
+- **Communication failure or signal loss**  
+  Alerts may not be transmitted successfully due to weak BLE connection, interference, or unstable network conditions
+- **Sensor inaccuracy or incorrect motion detection**  
+  Smartphone or wearable sensors may misinterpret normal movement as risky behaviour, or fail to detect actual sudden movement accurately
+- **Message delay or packet loss**  
+  Alert data may arrive too late, incompletely, or not at all, reducing the usefulness of the warning in time-critical scenarios
+- **Environmental limitations of BLE communication**  
+  Outdoor conditions, obstructions, interference, and variable device placement may affect BLE performance and reliability
+
+### Evaluation Criteria
+- Impact on system safety
+- Effect on warning reliability
+- Likelihood of occurrence in real-world use
+- Severity of consequences if unaddressed
+- Influence on the overall feasibility and robustness of the concept
+
+### Decision and Rationale
+The team concluded that **all of the identified limitations are important** and collectively shape the feasibility and robustness of the proposed concept. Rather than treating them as isolated issues, the team recognised that these limitations are closely related and may affect one another during real-world operation.
+
+Among them, communication failure or signal loss was considered the most critical limitation because the effectiveness of the proposed system depends fundamentally on whether the warning can actually be delivered to a nearby vehicle in time. Even if risky child movement is detected correctly, the system would still fail in its safety purpose if the alert does not reach the intended vehicle. For this reason, communication reliability was seen as the most immediate concern.
+
+At the same time, sensor inaccuracy was also acknowledged as a major limitation because unreliable motion detection could lead to false positives or missed warnings. If normal child movement is incorrectly classified as dangerous, the system may generate unnecessary alerts and reduce user trust. On the other hand, if sudden risky movement is not detected properly, the warning may never be triggered when it is actually needed.
+
+Message delay or packet loss was similarly recognised as an important limitation, especially because the concept is intended for time-critical road safety scenarios. A warning that arrives late may still technically be transmitted, but may no longer be useful enough to help the driver or vehicle respond safely. This means that communication success alone is not sufficient; the timing and completeness of the transmitted message also matter significantly.
+
+The team also noted the environmental limitations of BLE communication, particularly in outdoor roadside scenarios. Factors such as surrounding interference, physical obstructions, body shielding, weather conditions, or inconsistent device placement may all influence how reliably the signal is transmitted and received. Since the concept assumes practical use in real traffic environments rather than controlled indoor settings, this was considered an important limitation affecting overall system consistency.
+
+Overall, this discussion did not result in a single corrective solution, but instead served to document the key limitations that must be acknowledged as part of the concept’s development. While communication failure was viewed as the most critical limitation, the team recognised that sensor accuracy, message delay, and environmental communication constraints all remain important factors that together determine whether the proposed system would be practical, reliable, and robust in real-world application.
+
+### AI Usage
+-
+
+### Team Members
+- Yuankai
+- Daniel
+- Khee Xuan
+- Zelda
+- Syaakir
+- Wen Hui
+
+</details>
+
 
 # AI Usage
 
