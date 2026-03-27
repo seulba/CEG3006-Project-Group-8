@@ -73,8 +73,9 @@ In addition, the system uses predefined geofenced blindspot zones, which may be 
 
 ## System Flowchart
 <p align='center'>
-<img alt="image" src="https://github.com/user-attachments/assets/6da23dcd-5d3a-47bc-9feb-a32a27ab7322" width="450" />
+<img alt="image" src="https://github.com/user-attachments/assets/efd2793d-4e88-44e4-b0aa-4d8575fd40ee" width="380" />
 </p>
+
 The system begins by continuously monitoring the child’s location and motion data through the smartwatch. When the smartwatch detects that the child has entered a predefined geofenced blindspot or hazardous roadside area, the accelerometer and gyroscope data is further analysed to determine whether the child is moving toward the road at a potentially dangerous speed or pattern. If both conditions are satisfied, the smartwatch generates and broadcasts a BLE-based warning message to vehicles within a 15metre range of .
 
 A nearby vehicle equipped with a compatible receiver then receives the alert, validates the message, and warns the driver through the vehicle dashboard or head unit. To improve awareness for approaching vehicles, the first receiving vehicle may rebroadcast the message to nearby vehicles within a range of 50metres. The forwarding process is controlled using message expiry time and hop count to prevent excessive rebroadcasting.
