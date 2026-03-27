@@ -5,6 +5,10 @@
 
 ## Overall Solution
 
+The proposed Vehicle-to-Pedestrian (V2P) solution aims to improve child pedestrian safety in scenarios where behaviour can be highly unpredictable, such as sudden running or unexpected entry onto the road. In this concept, the child is equipped with a wearable device, such as a smartwatch with the proposed application installed. The application uses the device’s built-in sensors, including motion and location-related data, to monitor the child’s movement and determine whether the child is within a predefined blind-spot or danger zone.
+
+When the system detects movement patterns that suggest the child may be approaching or entering the road in a potentially dangerous manner, an alert is transmitted to nearby vehicles through BLE-based V2P communication. To further strengthen safety in blind-spot situations, a second layer of protection is introduced: the first vehicle that receives the alert can rapidly forward the warning to other approaching vehicles through low-latency V2V communication. This allows vehicles in the surrounding vicinity to receive an early warning even if the child is not yet directly visible, thereby giving drivers more time to slow down or stop and reducing the risk of a collision.
+
 
 ## Literature Review
 
@@ -84,6 +88,18 @@ A nearby vehicle equipped with a compatible receiver then receives the alert, va
 ## Hardware Components
 
 ## Real-life Scenario Use Case
+<p align='center'>
+<img alt="image" src="https://github.com/user-attachments/assets/831f7e57-8180-43aa-98f0-a167e9df72a5" />
+</p>
+
+In a typical roadside environment, a child may be walking or playing near a road where visibility is obstructed by fences, trees or walls. These roadside obstacles create blind spots, making it difficult for approaching drivers to detect the child early. In such situations, the child may suddenly move toward the roadside or step onto the road from a hidden area, leaving drivers with very limited reaction time.
+
+To address this, the proposed V2P concept uses a dedicated application installed directly on the child’s smartwatch. A user profile is first created within the application to identify the wearer as a child, allowing the system to operate according to the intended safety use case. The application utilizes the smartwatch’s built-in sensors, including the accelerometer, gyroscope, and GPS location services, to continuously monitor both the child’s movement and location.
+When the smartwatch detects that the child has entered a predefined blind spot or danger zone through geofencing, the system begins evaluating the child’s motion data more closely. By analysing changes in acceleration, movement behaviour, and motion patterns, the application determines whether the child is likely approaching the road in a potentially dangerous manner. Once a risk is detected, the smartwatch immediately broadcasts a BLE alert packet to the nearest vehicle within a 15-metre range.
+
+A nearby vehicle that receives the alert will display a warning on the vehicle dashboard or head unit to notify the driver that a child may be approaching or entering the roadway from a blind-spot area. To further improve safety beyond the initial detection range, the receiving vehicle then rebroadcasts the alert to other vehicles within a 50-metre range via DSRC packet. This allows drivers in the surrounding vicinity to be warned in advance, even before they reach the blind-spot area or gain direct visual contact with the child.
+
+As a result, the system provides an early-warning mechanism that improves driver awareness in blind-spot environments and gives both nearby and approaching vehicles more time to slow down or stop. This helps reduce the likelihood of collisions involving children in roadside danger zones.
 
 
 
