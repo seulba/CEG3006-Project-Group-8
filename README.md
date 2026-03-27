@@ -1097,7 +1097,7 @@ Throughout this project, I was able to work well with my team to develop our V2P
 </details>
 <details>
 <summary><strong>Wenhui</strong></summary>
-
+I contributed to the overall development of the project by participating in discussions, idea generation and refining of the proposed V2P solution. I was involved in developing the decision logs, documenting the team’s design process, key technical decisions and trade offs throughout the project. I also helped ensure that the system design was clearly explained and logically structured. Throughout the project, I worked together with my teammates to evaluate different design options and make decisions based on feasibility and relevance to real world scenarios. This project helped me strengthen my understanding of vehicular communication systems and engineering design thinking, especially in considering trade offs and practical constraints. It also improved my ability to collaborate effectively in a team and contribute to a structured design process.
 </details>
 
 # References
