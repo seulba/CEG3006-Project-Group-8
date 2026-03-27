@@ -1079,3 +1079,39 @@ Throughout this project, I was able to work well with my team to develop our V2P
 </details>
 
 # References
+
+References
+
+Sng, E. (2026, February 26). Police Life | Traffic accidents rose in 2025. police.gov.sg. https://www.police.gov.sg/Media-Hub/Police-Life/2026/02/Traffic-Accidents-Rose-in-202
+
+Sewalkar, P., & Seitz, J. (2019, January 17). Vehicle-to-pedestrian communication for Vulnerable road users: Survey, Design Considerations, and challenges. Sensors (Basel, Switzerland). https://pmc.ncbi.nlm.nih.gov/articles/PMC6359035/
+
+Certad, N., Varughese, J., Del Re, E., & Olaverri-Monreal, C. (2025, April 9). V2P Collision Warnings for Distracted Pedestrians: A Comparative Study with Traditional Auditory Alerts. https://arxiv.org/html/2504.13906v1
+
+Gelbal, S. Y., Aksun-Guvenc, B., & Guvenc, L. (2024, January 12). Vulnerable road user safety using mobile phones with vehicle-to-vru communication. MDPI. https://www.mdpi.com/2079-9292/13/2/331
+
+Oh, J., & Kim, J. (2025, February). Potential risk factors of child pedestrian crashes after-school hours in Seoul, Korea. https://www.sciencedirect.com/science/article/pii/S2694610626000160
+
+S, S., V, V., D, S., Priya, D. V., Hamza, M., & Bahl, A. (2025). Enhancement of 5G Ultra-Reliable Low-Latency Communication: Application of Edge Computing and AI-Based Approaches. 2025 IEEE 2nd International Conference on Information Technology, Electronics and Intelligent Communication Systems (ICITEICS), 1–6. https://doi.org/10.1109/iciteics64870.2025.11341410
+
+5G Network Reliability Explained | A10 Networks. (2019, August 5). A10 Networks. https://www.a10networks.com/blog/5g-network-reliability-explained/
+
+Pang, B., Claeys, T., Hallez, H., & Boydens, J. (2024). Modeling the Trade-off between Throughput and Reliability in a Bluetooth Low Energy Connection. ArXiv.org. https://arxiv.org/abs/2405.01231
+
+Apple. (2019). Apple Developer Program - Apple Developer. Apple.com. https://developer.apple.com/programs/
+
+Google Play Console | Google Play Console. (n.d.). Play.google.com. https://play.google.com/console/about/
+
+nRF52840 - Nordic Semiconductor. (n.d.). Www.nordicsemi.com. https://www.nordicsemi.com/Products/nRF52840
+
+The Zephyr Project – A proven RTOS ecosystem, by developers, for developers. (n.d.). Zephyr Project. https://zephyrproject.org/
+
+Get started with Wear OS. (n.d.). Android Developers. https://developer.android.com/training/wearables
+
+Fitbit Development: Fitbit SDK. (n.d.). Dev.fitbit.com. https://dev.fitbit.com/
+
+AWS. (2019). Pricing. Amazon Web Services, Inc. https://aws.amazon.com/pricing/
+
+Google. (2025). GCP Pricing. Google Cloud. https://cloud.google.com/pricing
+
+PDPC. (2025). PDPA Overview. Www.pdpc.gov.sg. https://www.pdpc.gov.sg/Overview-of-PDPA/The-Legislation/Personal-Data-Protection-Act
