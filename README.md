@@ -507,7 +507,7 @@ The transmitted message should be kept small and safety-prioritised, containing 
 Overall, BLE with compact priority messages was considered the best fit for the proposed system because it does not require additional hardware attachment for current smart devices, with its low power consumption, devices can last longer and it aligns well with the concept’s two-layer design in which a nearby vehicle first receives the child alert and then forwards it to other vehicles.
 
 ### AI Usage
-Used AI to help compare between the different communication on their pros and cons to aid in decision making
+Used AI to help compare between the different communication options on their pros and cons to aid in decision making
 
 ### Team Members
 - Daniel
