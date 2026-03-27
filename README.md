@@ -450,7 +450,7 @@ For this reason, the team did not treat BLE as a guaranteed long-range or fixed-
 
 The transmitted message should be kept small and safety-prioritised, containing only essential data such as estimated location, movement intensity or sudden acceleration status, and alert level. This reduces communication overhead, lowers the chance of congestion-related delay, improves BER performance, and makes the warning mechanism more appropriate for time-critical safety use.
 
-Overall, BLE with compact priority messages was considered the best fit for the proposed system because it does not require additional hardware attachment for current smart devices, with its low power consumption devices can last longer and it aligns well with the concept’s two-layer design, in which a nearby vehicle first receives the child alert and then forwards it to other vehicles.
+Overall, BLE with compact priority messages was considered the best fit for the proposed system because it does not require additional hardware attachment for current smart devices, with its low power consumption, devices can last longer and it aligns well with the concept’s two-layer design in which a nearby vehicle first receives the child alert and then forwards it to other vehicles.
 
 ### AI Usage
 -
