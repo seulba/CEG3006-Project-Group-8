@@ -132,7 +132,7 @@ As a result, the system provides an early-warning mechanism that improves driver
 
 # Decision Logs
 
-This document records the team’s key design decisions from **Decision Log #1 to Decision Log #10**, including the trigger or problem, options considered, evaluation criteria, and final rationale behind each selected direction.
+This document records the team’s key design decisions from **Decision Log #1 to Decision Log #18**, including the trigger or problem, options considered, evaluation criteria, and final rationale behind each selected direction.
 
 ---
 
