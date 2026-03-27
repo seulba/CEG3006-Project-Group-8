@@ -1077,7 +1077,7 @@ AI Weakness 3:
 # Individual Reflections
 <details>
 <summary><strong>Yuankai</strong></summary>
-
+During the project, I played an active role in shaping the development of our V2P system by contributing ideas and helping to define how different parts of the system should work together. I was involved in exploring possible approaches for the system architecture and contributed to several decision logs, where I helped outline key design choices and considerations. I also spent time researching communication technologies such as BLE and DSRC to better understand their capabilities and limitations. This allowed me to support the team’s discussions with more informed input and ensure that our proposed solution remained realistic. Throughout the project, I worked closely with my teammates to refine our design and improve the overall clarity of our system. I also took initiative in reviewing certain parts of the work to ensure consistency. This project allowed me to develop a deeper understanding of vehicular communication concepts and how engineering design decisions are made, especially when balancing trade-offs and real-world constraints. It also helped me improve my ability to work effectively within a team and contribute to a more structured and organised design process.
 </details>
 <details>
 <summary><strong>Daniel</strong></summary>
@@ -1085,6 +1085,7 @@ AI Weakness 3:
 </details>
 <details>
 <summary><strong>Khee Xuan</strong></summary>
+Throughout the project, I contributed actively together with my teammates in developing and refining our V2P system. I was involved in multiple aspects of the project, including researching relevant technologies and concepts to ensure that our ideas were accurate and suitable for real-world application. I also contributed to developing and refining system diagrams, as well as reviewing different parts of the project to ensure consistency and clarity across our work. In addition, I was involved in checking and validating our decision logs, helping to ensure that our explanations were logical and aligned with the overall system design. During discussions, I worked closely with my teammates to evaluate ideas, identify potential gaps, and improve our solution. Overall, I contributed across different areas of the project and supported the team in ensuring that our final design was well-developed, consistent, and realistic.
 
 </details>
 <details>
