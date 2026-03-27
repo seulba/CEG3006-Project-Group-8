@@ -83,9 +83,17 @@ Overall, the architecture is designed to provide an early-warning mechanism by c
 <img alt="image" src="https://github.com/user-attachments/assets/efd2793d-4e88-44e4-b0aa-4d8575fd40ee" width="380" />
 </p>
 
-The system begins by continuously monitoring the child’s location and motion data through the smartwatch. When the smartwatch detects that the child has entered a predefined geofenced blindspot or hazardous roadside area, the accelerometer and gyroscope data is further analysed to determine whether the child is moving toward the road at a potentially dangerous speed or pattern. If both conditions are satisfied, the smartwatch generates and broadcasts a BLE-based warning message to vehicles within a 15metre range of .
+The overall system begins with the smartwatch application continuously running in the background to monitor the child’s location and movement. Using GPS location services, the smartwatch first checks whether the child is within a predefined geofenced blind-spot or hazardous roadside zone. If the child is not within any defined danger zone, the system remains in monitoring mode and continues updating the child’s location in real time without generating any alert.
 
-A nearby vehicle equipped with a compatible receiver then receives the alert, validates the message, and warns the driver through the vehicle dashboard or head unit. To improve awareness for approaching vehicles, the first receiving vehicle may rebroadcast the message to nearby vehicles within a range of 50metres. The forwarding process is controlled using message expiry time and hop count to prevent excessive rebroadcasting.
+Once the child enters a predefined blind-spot or danger zone, the system activates a second stage of monitoring by analysing motion-related data from the smartwatch’s accelerometer and gyroscope. At this stage, the application evaluates whether the child’s movement pattern exceeds a defined threshold or indicates that the child is approaching the road in a potentially dangerous manner. This helps the system distinguish risky movement from normal activity and ensures that alerts are only triggered when both the location condition and motion condition are satisfied.
+
+If the movement is classified as a potential child-risk event, the smartwatch generates a warning message containing the relevant alert information and broadcasts it as a BLE packet. This alert is transmitted to the nearest vehicle within an approximate range of 15 metres. The nearby vehicle then receives the packet through a compatible receiver and performs message validation, such as checking whether the message is fresh, valid, and not a duplicate of a previously received alert.
+
+If the message is found to be invalid or outdated, it is discarded and no further action is taken. However, if the message is valid, the vehicle generates a driver warning and displays it on the dashboard or head unit, allowing the driver to become aware of a potential child hazard ahead. This forms the first stage of the vehicle-side response, where the closest vehicle is directly alerted by the child’s smartwatch.
+
+To further extend awareness beyond the first receiving vehicle, the system then checks whether the message is still within its permitted forwarding conditions, such as message expiry time and hop count. If the forwarding limit has already been reached, the rebroadcast process stops and the system returns to monitoring mode. Otherwise, the receiving vehicle rebroadcasts the alert to other nearby vehicles within an approximate range of 50 metres. These nearby vehicles then repeat the same validation and warning process, allowing drivers further back in the traffic flow to be warned in advance even if they do not yet have direct visibility of the child.
+
+Overall, the system flow is designed as a layered warning process. The smartwatch first uses geofencing and motion analysis to determine whether a genuine roadside risk exists, then sends a direct BLE alert to the nearest vehicle, and finally extends the warning through vehicle rebroadcasting to surrounding traffic. This allows the system to provide earlier and more context-aware driver awareness in blind-spot child pedestrian scenarios while reducing unnecessary alerts and limiting excessive message propagation.
 
 
 ## Hardware Components and Parameters
@@ -1060,20 +1068,20 @@ ChatGPT
 <summary><strong>AI Prompts</strong></summary>
 AI Prompt 1:
 <p align='center'>
-<img alt=<img width="722" height="741" alt="Screenshot 2026-03-27 215823" src="https://github.com/user-attachments/assets/152ee29d-5ebe-45a1-a766-cc9c86b7f024" />
+<img alt="Screenshot 2026-03-27 215823" src="https://github.com/user-attachments/assets/152ee29d-5ebe-45a1-a766-cc9c86b7f024" width="550" />
 </p>
 
 AI Prompt 2:
 <p align='center'>
-<img alt=<img width="799" height="792" alt="Screenshot 2026-03-27 220126" src="https://github.com/user-attachments/assets/b5959c53-24a9-4e00-af68-1139758bf0ae" />
+<img alt="Screenshot 2026-03-27 220126" src="https://github.com/user-attachments/assets/b5959c53-24a9-4e00-af68-1139758bf0ae" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="797" height="805" alt="Screenshot 2026-03-27 220206" src="https://github.com/user-attachments/assets/b9df0ce1-06d3-463e-a670-5d6e3b9d216e" />
+<img alt="Screenshot 2026-03-27 220206" src="https://github.com/user-attachments/assets/b9df0ce1-06d3-463e-a670-5d6e3b9d216e" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="750" height="761" alt="Screenshot 2026-03-27 220314" src="https://github.com/user-attachments/assets/1da48350-247b-44a8-9006-8f1bcacdc985" />
+<img alt="Screenshot 2026-03-27 220314" src="https://github.com/user-attachments/assets/1da48350-247b-44a8-9006-8f1bcacdc985" width="550" />
 </p>
 
 Evaluation for Prompt 1 and 2:
@@ -1091,15 +1099,15 @@ AI Prompt 3:
 <summary><strong>Identified Weaknesses/Hallucinations</strong></summary>
 AI Hallucination 1 (Log 2):
 <p align='center'>
-<img alt=<img width="1141" height="1280" alt="image" src="https://github.com/user-attachments/assets/32a0e457-a3ef-448b-b437-e2381225677b" />
+<img alt="image" src="https://github.com/user-attachments/assets/32a0e457-a3ef-448b-b437-e2381225677b" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="1012" height="1212" alt="image" src="https://github.com/user-attachments/assets/7cf79b8b-0419-47f9-ac4b-22cb844149e4" />
+<img alt="image" src="https://github.com/user-attachments/assets/7cf79b8b-0419-47f9-ac4b-22cb844149e4" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="1058" height="1280" alt="image" src="https://github.com/user-attachments/assets/396d8e52-5160-4322-8161-a4a207a924f1" />
+<img alt="image" src="https://github.com/user-attachments/assets/396d8e52-5160-4322-8161-a4a207a924f1" width="550" />
 </p>
 
 Evaluation:
@@ -1109,19 +1117,19 @@ As such, the assumption that auditory signals alone provide meaningful safety be
 
 AI Weakness 2 (Log 8):
 <p align='center'>
-<img alt=<img width="1031" height="1280" alt="image" src="https://github.com/user-attachments/assets/81298593-a6ae-412d-adcf-a029b1d6a65d" />
+<img alt="image" src="https://github.com/user-attachments/assets/81298593-a6ae-412d-adcf-a029b1d6a65d" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="914" height="1280" alt="image" src="https://github.com/user-attachments/assets/bcfbda2d-2f91-456e-9418-226ae3d3855b" />
+<img alt="image" src="https://github.com/user-attachments/assets/bcfbda2d-2f91-456e-9418-226ae3d3855b" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="1020" height="1178" alt="image" src="https://github.com/user-attachments/assets/b899aa07-d11d-43b4-9443-8ff89c8ef4ec" />
+<img alt="image" src="https://github.com/user-attachments/assets/b899aa07-d11d-43b4-9443-8ff89c8ef4ec" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="1060" height="564" alt="image" src="https://github.com/user-attachments/assets/79d2b8d8-8a5f-4cf6-99ee-036731c68fb4" />
+<img alt="image" src="https://github.com/user-attachments/assets/79d2b8d8-8a5f-4cf6-99ee-036731c68fb4" width="550" />
 </p>
 
 Evaluation:
@@ -1136,15 +1144,15 @@ https://support.astropad.com/en/articles/11835410-latency-and-expected-speeds-wi
 
 AI Weakness 3 (Log 12):
 <p align='center'>
-<img alt=<img width="872" height="1280" alt="image" src="https://github.com/user-attachments/assets/ec383509-fd7e-4960-b612-4502107fd634" />
+<img alt="image" src="https://github.com/user-attachments/assets/ec383509-fd7e-4960-b612-4502107fd634" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="1066" height="988" alt="image" src="https://github.com/user-attachments/assets/77254348-5ee0-4ce7-a522-18e4942bf5e7" />
+<img alt="image" src="https://github.com/user-attachments/assets/77254348-5ee0-4ce7-a522-18e4942bf5e7" width="550" />
 </p>
 
 <p align='center'>
-<img alt=<img width="1064" height="1058" alt="image" src="https://github.com/user-attachments/assets/2b760665-c2f7-40db-aa55-bb0f0c1315f3" />
+<img alt="image" src="https://github.com/user-attachments/assets/2b760665-c2f7-40db-aa55-bb0f0c1315f3" width="550" />
 </p>
 
 Evaluation:
@@ -1175,7 +1183,7 @@ delivering a technical sound solution.
 </details>
 <details>
 <summary><strong>Khee Xuan</strong></summary>
-Throughout the project, I contributed actively alongside my teammates in developing and refining our V2P system. I was involved in multiple aspects of the project, including researching relevant technologies and concepts to ensure that our ideas were accurate and applicable to real-world scenarios. I also contributed to the development and refinement of system diagrams, as well as drafting several decision logs and refining others to ensure consistency across the project. In addition, I was involved in reviewing different parts of the work and validating our explanations so that they remained logical and aligned with the overall system design. During discussions, I worked closely with my teammates to evaluate ideas, identify potential gaps, and improve our solution. Overall, I contributed across various areas of the project and supported the team in ensuring that our final design was well-structured, coherent, and realistic.
+Throughout the project, I contributed actively alongside my teammates in developing and refining our V2P system. I was involved in multiple aspects of the project, including researching relevant technologies and concepts to ensure that our ideas were accurate and applicable to real-world scenarios. I also contributed to the development and refinement of system diagrams, as well as drafting several decision logs and refining others to ensure consistency across the project. In addition, I was involved in reviewing different parts of the work and validating our explanations so that they remained logical and aligned with the overall system design. During discussions, I worked closely with my teammates to evaluate ideas, identify potential gaps, and improve our solution. Overall, I contributed across various areas of the project and supported the team in ensuring that our final design was well-structured, coherent, and realistic. This project  helped me to better understand how each part of a project must align to create a coherent and realistic solution and good teamwork is not just about dividing tasks, but about communication, and helping one another.
 </details>
 <details>
 <summary><strong>Zelda Chua</strong></summary>
@@ -1190,7 +1198,8 @@ system that is coherent, efficient, and functional.
 </details>
 <details>
 <summary><strong>Syaakir</strong></summary>
-Throughout this project, I was able to work well with my team to develop our V2P system. We contributed together to different parts of the project, including the decision logs and overall system design. I was involved in working on some of the decision logs, such as refining how the system alerts drivers and how excessive alerts could affect performance. I also contributed to drafting one of the use cases, which was later refined with feedback from my team. I took part in discussions to better understand how the system works and to help identify any gaps in our idea. There were times where I was unsure about certain concepts, but my teammates helped to clarify them, and I was able to learn from both the project and the team. Overall, this project was a good learning experience for me, as I was able to improve my understanding of vehicular communication systems and engineering design thinking while also working collaboratively with my team.
+Throughout this project, I was able to work well with my team to develop our V2P system. We contributed together to different parts of the project, including the decision logs and overall system design. I was involved in working on some of the decision logs, such as refining how the system alerts drivers and how excessive alerts could affect performance. I also contributed to drafting one of the use cases, which was later refined with feedback from my team. I took part in discussions to better understand how the system works and to help identify any gaps in our idea. There were times where I was unsure about certain concepts, but my teammates helped to clarify them, and I was able to learn from both the project and the team. Overall, this project was a good learning experience for me as I got to work on the decision logs, system design, and use case drafting allowing me to gain a better understanding of vehicular communication systems and engineering design thinking.I also learnt the importance of teamwork, discussion, and feedback in improving our ideas.
+
 </details>
 <details>
 <summary><strong>Wenhui</strong></summary>
